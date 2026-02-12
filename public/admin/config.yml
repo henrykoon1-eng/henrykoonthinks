@@ -1,0 +1,32 @@
+backend:
+  name: github
+  repo: henrykoon1-eng/henrykoonthinks
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Life", value: "life" }
+          - { label: "Faith", value: "faith" }
+          - { label: "Essays", value: "essays" }
+          - { label: "The Outdoors", value: "the-outdoors" }
+          - { label: "Poetry", value: "poetry" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
