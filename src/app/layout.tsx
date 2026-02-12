@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
+import Script from 'next/script';
 import SubscribeForm from '@/components/SubscribeForm';
 
 export const metadata: Metadata = {
@@ -23,11 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-      </head>
       <body className="min-h-screen flex flex-col">
-        <script dangerouslySetInnerHTML={{ __html: `
+        <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="afterInteractive" />
+        <Script id="netlify-identity-redirect" strategy="afterInteractive">{`
           if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", function(user) {
               if (!user) {
@@ -37,7 +36,7 @@ export default function RootLayout({
               }
             });
           }
-        `}} />
+        `}</Script>
         {/* Header */}
         <header className="bg-stone-900 border-b border-stone-800 sticky top-0 z-50">
           <div className="px-4 sm:px-8 lg:px-16">
