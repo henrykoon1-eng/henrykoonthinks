@@ -1,6 +1,7 @@
 import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import GiscusComments from '@/components/GiscusComments';
 
 interface PostPageProps {
   params: { slug: string };
@@ -84,6 +85,9 @@ export default async function PostPage({ params }: PostPageProps) {
         className="prose text-stone-800 text-lg leading-relaxed"
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
+
+      {/* Comments */}
+      <GiscusComments />
 
       {/* Back Link */}
       <div className="mt-12 pt-8 border-t border-stone-200">
