@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: henrykoon1-eng/henrykoonthinks
+  name: git-gateway
   branch: main
 
 publish_mode: editorial_workflow
