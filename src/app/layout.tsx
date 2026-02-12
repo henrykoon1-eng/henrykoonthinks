@@ -23,7 +23,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+      </head>
       <body className="min-h-screen flex flex-col">
+        <script dangerouslySetInnerHTML={{ __html: `
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function(user) {
+              if (!user) {
+                window.netlifyIdentity.on("login", function() {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        `}} />
         {/* Header */}
         <header className="bg-stone-900 border-b border-stone-800 sticky top-0 z-50">
           <div className="px-4 sm:px-8 lg:px-16">
