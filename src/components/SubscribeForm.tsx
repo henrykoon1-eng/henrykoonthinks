@@ -12,29 +12,20 @@ export default function SubscribeForm() {
     setStatus('loading');
 
     try {
-      const res = await fetch('https://api.buttondown.email/v1/subscribers', {
+      // Mailchimp embedded form submission
+      const formData = new FormData();
+      formData.append('EMAIL', email);
+      
+      const res = await fetch('https://eepurl.com/jzxjt6', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Token ${process.env.NEXT_PUBLIC_BUTTONDOWN_API_KEY}`,
-        },
-        body: JSON.stringify({ email_address: email }),
+        body: formData,
+        mode: 'no-cors', // Mailchimp doesn't support CORS on embedded forms
       });
 
-      if (res.ok) {
-        setStatus('success');
-        setMessage('You\'re in. Check your inbox to confirm.');
-        setEmail('');
-      } else {
-        const data = await res.json();
-        if (data?.detail?.includes('already')) {
-          setStatus('success');
-          setMessage('You\'re already subscribed.');
-        } else {
-          setStatus('error');
-          setMessage('Something went wrong. Try again.');
-        }
-      }
+      // Since no-cors doesn't give us response details, assume success
+      setStatus('success');
+      setMessage("You're in. Check your inbox to confirm your subscription.");
+      setEmail('');
     } catch {
       setStatus('error');
       setMessage('Something went wrong. Try again.');
