@@ -15,6 +15,7 @@ const navLinks = [
   { href: '/category/essays', label: 'Essays' },
   { href: '/category/the-outdoors', label: 'The Outdoors' },
   { href: '/category/poetry', label: 'Poetry' },
+  { href: '/category/reviews', label: 'Reviews' },
 ];
 
 export default function RootLayout({
@@ -87,6 +88,7 @@ export default function RootLayout({
                   <li><Link href="/category/essays" className="hover:text-stone-200 transition-colors">Essays</Link></li>
                   <li><Link href="/category/the-outdoors" className="hover:text-stone-200 transition-colors">The Outdoors</Link></li>
                   <li><Link href="/category/poetry" className="hover:text-stone-200 transition-colors">Poetry</Link></li>
+                  <li><Link href="/category/reviews" className="hover:text-stone-200 transition-colors">Reviews</Link></li>
                 </ul>
               </div>
               <div>

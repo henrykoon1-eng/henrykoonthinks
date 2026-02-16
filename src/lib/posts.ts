@@ -17,7 +17,7 @@ export interface PostData {
 }
 
 export function getAllCategories(): string[] {
-  return ['life', 'faith', 'essays', 'the-outdoors', 'poetry'];
+  return ['life', 'faith', 'essays', 'the-outdoors', 'poetry', 'reviews'];
 }
 
 export function getCategoryDisplayName(slug: string): string {
@@ -27,6 +27,7 @@ export function getCategoryDisplayName(slug: string): string {
     essays: 'Essays',
     'the-outdoors': 'The Outdoors',
     poetry: 'Poetry',
+    reviews: 'Reviews',
   };
   return map[slug] || slug;
 }

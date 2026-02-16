@@ -30,6 +30,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     essays: "It's time I stop ranting and rage baiting, here's me trying to think",
     'the-outdoors': 'Tips from the trail, notes from the blind, talks with the trees, and arguments with bees',
     poetry: 'Yeats says "We must labor to be beautiful" and as I\'m not, here I shall try and fail',
+    reviews: 'My thoughts on books, films, gear, and anything else worth reviewing',
   };
 
   const categoryImages: Record<string, string> = {
@@ -38,6 +39,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     essays: '/images/essays-hero.avif',
     faith: '/images/faith-hero.jpg',
     life: '/images/life-hero.avif',
+    reviews: '/images/reviews-hero.jpg',
   };
 
   const categoryPositions: Record<string, string> = {
@@ -46,6 +48,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     essays: 'bg-[center_70%]',
     faith: 'bg-[center_55%]',
     life: 'bg-[center_60%]',
+    reviews: 'bg-center',
   };
 
   const heroImage = categoryImages[slug] || '/images/default-hero.jpg';

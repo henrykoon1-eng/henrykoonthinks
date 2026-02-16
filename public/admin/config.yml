@@ -25,6 +25,7 @@ collections:
           - { label: "Essays", value: "essays" }
           - { label: "The Outdoors", value: "the-outdoors" }
           - { label: "Poetry", value: "poetry" }
+          - { label: "Reviews", value: "reviews" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
       - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
