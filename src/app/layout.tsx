@@ -6,7 +6,7 @@ import SubscribeForm from '@/components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Henry Koon Thinks',
-  description: 'A blog about life, faith, essays, the outdoors, and poetry.',
+  description: 'A collection of thoughts, essays, and other writings across a wide range of my interests',
 };
 
 const navLinks = [
