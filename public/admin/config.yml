@@ -14,6 +14,11 @@ collections:
     create: true
     slug: "{{slug}}"
     extension: "md"
+    view:
+      fields:
+        - { label: "Title", name: "title" }
+        - { label: "Category", name: "category" }
+        - { label: "Date", name: "date" }
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Category"
