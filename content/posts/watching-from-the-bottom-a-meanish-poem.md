@@ -24,7 +24,7 @@ This is a poem dedicated to the people swarming the parking lots of our national
 
 *Your focus; another tray and another bite*
 
-*You have no way to see the light*
+*You have no way to see this mountaintop light*
 
 *Your fear bids you stay, my joy lifts like a kite*
 
