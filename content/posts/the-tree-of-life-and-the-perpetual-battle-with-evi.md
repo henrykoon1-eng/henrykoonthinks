@@ -2,7 +2,7 @@
 title: The Tree of Life and the Perpetual Battle with Evil
 category: the-outdoors
 date: 2024-04-09
-excerpt: The Tree of Good and Evil&nbsp;
+excerpt: ""
 ---
 
 # The Tree of Life and the Perpetual Battle with Evil
