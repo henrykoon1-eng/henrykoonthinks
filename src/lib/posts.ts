@@ -13,6 +13,7 @@ export interface PostData {
   category: string;
   excerpt: string;
   coverImage?: string;
+  draft?: boolean;
   contentHtml?: string;
 }
 
@@ -53,8 +54,10 @@ export function getAllPosts(): PostData[] {
         category: data.category || 'life',
         excerpt: data.excerpt || '',
         coverImage: data.coverImage || undefined,
+        draft: data.draft || false,
       };
-    });
+    })
+    .filter((post) => !post.draft);
 
   return allPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
@@ -70,6 +73,12 @@ export function getAllPostSlugs(): string[] {
   return fs
     .readdirSync(postsDirectory)
     .filter((f) => f.endsWith('.md'))
+    .filter((f) => {
+      const fullPath = path.join(postsDirectory, f);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data } = matter(fileContents);
+      return !data.draft;
+    })
     .map((f) => f.replace(/\.md$/, ''));
 }
 

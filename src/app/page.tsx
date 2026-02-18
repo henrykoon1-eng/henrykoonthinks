@@ -46,7 +46,7 @@ export default function HomePage() {
       </section>
 
       {/* Scrolling Quotes Banner */}
-      <section className="bg-stone-900/60 backdrop-blur-sm py-6">
+      <section className="bg-black py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-stone-400 text-sm uppercase tracking-widest">Some gems I&apos;ve found lately</h2>

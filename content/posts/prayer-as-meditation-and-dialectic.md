@@ -2,6 +2,7 @@
 title: "Prayer as meditation and dialectic"
 date: "2024-04-22"
 category: "faith"
+draft: true
 excerpt: "&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; What is it to think of prayer? The first images that come to me are of kneeling in church and of reciting cre..."
 ---
 
