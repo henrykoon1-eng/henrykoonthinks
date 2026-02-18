@@ -31,3 +31,23 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
       - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "quotes"
+    label: "Quotes"
+    file: "content/quotes.json"
+    description: "Manage your quotes collection"
+    fields:
+      - label: "Quotes"
+        name: "quotes"
+        widget: "list"
+        fields:
+          - { label: "Quote Text", name: "text", widget: "string" }
+          - { label: "Author", name: "author", widget: "string" }
+          - label: "Tag"
+            name: "tag"
+            widget: "select"
+            options:
+              - { label: "Faith", value: "faith" }
+              - { label: "Life", value: "life" }
+              - { label: "Nature", value: "nature" }
+              - { label: "Wisdom", value: "wisdom" }

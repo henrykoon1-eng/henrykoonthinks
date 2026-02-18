@@ -16,6 +16,7 @@ const navLinks = [
   { href: '/category/the-outdoors', label: 'The Outdoors' },
   { href: '/category/poetry', label: 'Poetry' },
   { href: '/category/reviews', label: 'Reviews' },
+  { href: '/quotes', label: 'Quotes' },
 ];
 
 export default function RootLayout({

@@ -1,6 +1,8 @@
 import { getAllPosts, getAllCategories, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import FilteredPosts from '@/components/FilteredPosts';
+import FloatingQuotes from '@/components/FloatingQuotes';
+import quotes from '../../content/quotes.json';
 
 export default function HomePage() {
   const posts = getAllPosts();
@@ -43,16 +45,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quote Banner */}
-      <section className="bg-stone-900 py-8 text-center">
-        <blockquote className="max-w-3xl mx-auto px-6">
-          <p className="text-stone-400 italic text-lg sm:text-xl leading-relaxed">
-            &ldquo;The world is charged with the grandeur of God.&rdquo;
-          </p>
-          <cite className="text-stone-600 text-sm mt-2 block not-italic tracking-wider uppercase">
-            Gerard Manley Hopkins
-          </cite>
-        </blockquote>
+      {/* Quotes Preview */}
+      <section className="bg-stone-900 py-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-stone-400 text-sm uppercase tracking-widest">Words I Live By</h2>
+            <Link href="/quotes" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 transition-colors">
+              View All →
+            </Link>
+          </div>
+          <FloatingQuotes quotes={quotes} limit={3} />
+        </div>
       </section>
 
       {/* Latest Articles with Category Tabs */}
