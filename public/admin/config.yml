@@ -15,21 +15,11 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     view:
-      type: grid
       fields:
         - { label: "Title", name: "title" }
-        - { label: "Category", name: "category", pattern: "{{category}}" }
+        - { label: "Category", name: "category" }
         - { label: "Date", name: "date" }
         - { label: "Status", name: "status" }
-      group:
-        field: status
-        label: Workflow Stage
-      filters:
-        - field: category
-          name: Categories
-      sort:
-        fields: ["status", "date"]
-        directions: ["descending", "descending"]
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Category"
