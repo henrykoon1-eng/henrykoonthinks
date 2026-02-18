@@ -2,7 +2,7 @@ import { getAllPosts, getAllCategories, getCategoryDisplayName } from '@/lib/pos
 import Link from 'next/link';
 import FilteredPosts from '@/components/FilteredPosts';
 import ScrollingQuotes from '@/components/ScrollingQuotes';
-import quotes from '../../content/quotes.json';
+import quotesData from '../../content/quotes.json';
 
 export default function HomePage() {
   const posts = getAllPosts();
@@ -54,7 +54,7 @@ export default function HomePage() {
               View All →
             </Link>
           </div>
-          <ScrollingQuotes quotes={quotes} />
+          <ScrollingQuotes quotes={quotesData.quotes} />
         </div>
       </section>
 

@@ -1,42 +1,44 @@
-[
-  {
-    "text": "The world is charged with the grandeur of God.",
-    "author": "Gerard Manley Hopkins",
-    "tag": "faith"
-  },
-  {
-    "text": "Not all those who wander are lost.",
-    "author": "J.R.R. Tolkien",
-    "tag": "life"
-  },
-  {
-    "text": "The heavens declare the glory of God; the skies proclaim the work of his hands.",
-    "author": "Psalm 19:1",
-    "tag": "faith"
-  },
-  {
-    "text": "In every walk with nature one receives far more than he seeks.",
-    "author": "John Muir",
-    "tag": "nature"
-  },
-  {
-    "text": "The unexamined life is not worth living.",
-    "author": "Socrates",
-    "tag": "wisdom"
-  },
-  {
-    "text": "To live is the rarest thing in the world. Most people exist, that is all.",
-    "author": "Oscar Wilde",
-    "tag": "life"
-  },
-  {
-    "text": "The mountains are calling and I must go.",
-    "author": "John Muir",
-    "tag": "nature"
-  },
-  {
-    "text": "A room without books is like a body without a soul.",
-    "author": "Marcus Tullius Cicero",
-    "tag": "wisdom"
-  }
-]
+{
+  "quotes": [
+    {
+      "text": "The world is charged with the grandeur of God.",
+      "author": "Gerard Manley Hopkins",
+      "tag": "faith"
+    },
+    {
+      "text": "Not all those who wander are lost.",
+      "author": "J.R.R. Tolkien",
+      "tag": "life"
+    },
+    {
+      "text": "The heavens declare the glory of God; the skies proclaim the work of his hands.",
+      "author": "Psalm 19:1",
+      "tag": "faith"
+    },
+    {
+      "text": "In every walk with nature one receives far more than he seeks.",
+      "author": "John Muir",
+      "tag": "nature"
+    },
+    {
+      "text": "The unexamined life is not worth living.",
+      "author": "Socrates",
+      "tag": "wisdom"
+    },
+    {
+      "text": "To live is the rarest thing in the world. Most people exist, that is all.",
+      "author": "Oscar Wilde",
+      "tag": "life"
+    },
+    {
+      "text": "The mountains are calling and I must go.",
+      "author": "John Muir",
+      "tag": "nature"
+    },
+    {
+      "text": "A room without books is like a body without a soul.",
+      "author": "Marcus Tullius Cicero",
+      "tag": "wisdom"
+    }
+  ]
+}

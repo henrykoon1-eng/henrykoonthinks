@@ -1,7 +1,8 @@
 import FloatingQuotes from '@/components/FloatingQuotes';
-import quotes from '../../../content/quotes.json';
+import quotesData from '../../../content/quotes.json';
 
 export default function QuotesPage() {
+  const quotes = quotesData.quotes;
   return (
     <div>
       {/* Hero */}
