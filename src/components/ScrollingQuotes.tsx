@@ -3,7 +3,6 @@
 interface Quote {
   text: string;
   author: string;
-  tag: string;
 }
 
 export default function ScrollingQuotes({ quotes }: { quotes: Quote[] }) {

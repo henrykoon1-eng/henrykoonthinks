@@ -33,8 +33,8 @@ collections:
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
 
-  - name: "settings"
-    label: "Settings"
+  - name: "quotes"
+    label: "Quotes"
     files:
       - name: "quotes"
         label: "Quotes"
@@ -47,11 +47,3 @@ collections:
             fields:
               - { label: "Quote Text", name: "text", widget: "string" }
               - { label: "Author", name: "author", widget: "string" }
-              - label: "Tag"
-                name: "tag"
-                widget: "select"
-                options:
-                  - { label: "Faith", value: "faith" }
-                  - { label: "Life", value: "life" }
-                  - { label: "Nature", value: "nature" }
-                  - { label: "Wisdom", value: "wisdom" }

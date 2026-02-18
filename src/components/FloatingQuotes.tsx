@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react';
 interface Quote {
   text: string;
   author: string;
-  tag: string;
 }
 
 export default function FloatingQuotes({ quotes, limit }: { quotes: Quote[]; limit?: number }) {
