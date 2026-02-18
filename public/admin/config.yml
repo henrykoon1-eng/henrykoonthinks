@@ -14,7 +14,7 @@ collections:
     create: true
     slug: "{{slug}}"
     extension: "md"
-    summary: "{{title}} - [{{category}}] - {{date}}"
+    summary: "{{title}} - [{{category}}]\n{{date}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Category"
