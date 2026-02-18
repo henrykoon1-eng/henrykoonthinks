@@ -54,10 +54,10 @@ This site is configured for static export and can be deployed to Netlify:
 After deploying to Netlify:
 
 1. In Netlify, go to **Domain Settings** > **Add custom domain**
-2. Enter `henrykoonthinks.com`
+2. Enter `henrythinks.com`
 3. Netlify will give you DNS records (usually a CNAME or A record)
 4. Log into DreamHost panel > **Manage Domains**
-5. Set DNS for `henrykoonthinks.com` to point to Netlify:
+5. Set DNS for `henrythinks.com` to point to Netlify:
    - Option A: Change nameservers to Netlify's nameservers
    - Option B: Add a CNAME record pointing to your Netlify site URL
 6. Wait for DNS propagation (can take up to 48 hours)
