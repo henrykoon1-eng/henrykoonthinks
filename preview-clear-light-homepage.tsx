@@ -21,23 +21,23 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero Section — just a smidge clearer and brighter */}
-      <section className="relative h-[80vh] min-h-[550px] flex items-center justify-center overflow-hidden bg-stone-700">
+      {/* Hero Section — clearer and lighter */}
+      <section className="relative h-[80vh] min-h-[550px] flex items-center justify-center overflow-hidden bg-stone-800">
         <img
           src="/images/home-hero.jpg"
           alt="Hiker walking toward mountains"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-90"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-800/30 via-stone-800/25 to-stone-800/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/40 via-stone-900/30 to-stone-900/50" />
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg uppercase"
-            style={{ letterSpacing: '0.08em', textShadow: '1px 1px 3px rgba(0,0,0,0.4)' }}
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] drop-shadow-xl uppercase"
+            style={{ letterSpacing: '0.08em', textShadow: '1px 1px 4px rgba(0,0,0,0.6)' }}
           >
             Henry Koon Thinks
           </h1>
           <div className="w-20 h-0.5 bg-brand-400 mx-auto mb-6" />
-          <p className="text-lg sm:text-xl text-white leading-relaxed font-light drop-shadow-sm">
+          <p className="text-lg sm:text-xl text-stone-100 leading-relaxed font-light drop-shadow-md">
             And here are some thoughts...
           </p>
         </div>

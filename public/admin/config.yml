@@ -20,6 +20,12 @@ collections:
         - { label: "Category", name: "category" }
         - { label: "Date", name: "date" }
         - { label: "Status", name: "status" }
+      filters:
+        - field: category
+          name: Categories
+      sort:
+        fields: ["status", "date"]
+        directions: ["descending", "descending"]
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Category"
