@@ -1,7 +1,7 @@
 import { getAllPosts, getAllCategories, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import FilteredPosts from '@/components/FilteredPosts';
-import FloatingQuotes from '@/components/FloatingQuotes';
+import ScrollingQuotes from '@/components/ScrollingQuotes';
 import quotes from '../../content/quotes.json';
 
 export default function HomePage() {
@@ -45,16 +45,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quotes Preview */}
-      <section className="bg-stone-900 py-10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-stone-400 text-sm uppercase tracking-widest">Words I Live By</h2>
+      {/* Scrolling Quotes Banner */}
+      <section className="bg-stone-900/60 backdrop-blur-sm py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-stone-400 text-sm uppercase tracking-widest">Some gems I&apos;ve found lately</h2>
             <Link href="/quotes" className="text-brand-400 text-sm uppercase tracking-wider hover:text-brand-300 transition-colors">
               View All →
             </Link>
           </div>
-          <FloatingQuotes quotes={quotes} limit={3} />
+          <ScrollingQuotes quotes={quotes} />
         </div>
       </section>
 

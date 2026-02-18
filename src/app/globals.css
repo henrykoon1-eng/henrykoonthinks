@@ -10,6 +10,18 @@
   transform: translateY(0) !important;
 }
 
+/* Scrolling quotes marquee */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
 @layer base {
   body {
     @apply font-sans text-stone-800 bg-stone-100;
