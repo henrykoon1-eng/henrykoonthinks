@@ -55,6 +55,7 @@
 
   .prose p {
     @apply mb-4 leading-relaxed text-stone-700;
+    text-indent: 2em;
   }
 
   .prose blockquote {
