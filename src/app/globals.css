@@ -55,6 +55,9 @@
 
   .prose p {
     @apply mb-4 leading-relaxed text-stone-700;
+  }
+
+  .prose-indent p {
     text-indent: 2em;
   }
 

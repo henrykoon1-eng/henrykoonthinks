@@ -82,7 +82,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Post Content */}
       <div
-        className="prose text-stone-800 text-lg leading-relaxed"
+        className={`prose text-stone-800 text-lg leading-relaxed${post.category !== 'poetry' ? ' prose-indent' : ''}`}
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
 
