@@ -2,6 +2,7 @@
 title: The Feminine Good and Evil in Middle Earth
 category: essays
 date: 2026-02-18
+coverImage: https://www.reddit.com/r/lordoftherings/comments/1pukei1/the_lord_of_the_rings_art_by_alan_lee/
 draft: false
 ---
 The Feminine Good and Evil in Middle Earth
