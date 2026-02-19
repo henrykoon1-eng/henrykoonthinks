@@ -15,11 +15,13 @@ export default function SubscribeForm() {
       // Mailchimp embedded form submission
       const formData = new FormData();
       formData.append('EMAIL', email);
+      formData.append('u', '12ad0b551709289557e47fad5');
+      formData.append('id', 'abe7c58a76');
       
-      const res = await fetch('https://eepurl.com/jzxjt6', {
+      await fetch('https://henrykoonthinks.us9.list-manage.com/subscribe/post', {
         method: 'POST',
         body: formData,
-        mode: 'no-cors', // Mailchimp doesn't support CORS on embedded forms
+        mode: 'no-cors',
       });
 
       // Since no-cors doesn't give us response details, assume success
