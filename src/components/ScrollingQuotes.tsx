@@ -1,5 +1,7 @@
 'use client';
 
+import { useMemo } from 'react';
+
 interface Quote {
   text: string;
   author: string;
@@ -12,9 +14,13 @@ function getWidth(len: number) {
   return 'max-w-lg';
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
 export default function ScrollingQuotes({ quotes }: { quotes: Quote[] }) {
-  // Double the quotes for seamless looping
-  const doubled = [...quotes, ...quotes];
+  const shuffled = useMemo(() => shuffle(quotes), [quotes]);
+  const doubled = [...shuffled, ...shuffled];
 
   return (
     <div className="overflow-hidden relative">

@@ -1,16 +1,21 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 interface Quote {
   text: string;
   author: string;
 }
 
+function shuffle<T>(arr: T[]): T[] {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
 export default function FloatingQuotes({ quotes, limit }: { quotes: Quote[]; limit?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const displayed = limit ? quotes.slice(0, limit) : quotes;
+  const shuffled = useMemo(() => shuffle(quotes), [quotes]);
+  const displayed = limit ? shuffled.slice(0, limit) : shuffled;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
