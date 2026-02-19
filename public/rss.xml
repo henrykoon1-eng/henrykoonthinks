@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Henry Koon Thinks</title>
     <link>https://henrythinks.com</link>
@@ -13,6 +13,7 @@
       <guid>https://henrythinks.com/posts/prayer-as-meditation-and-dialectic</guid>
       <pubDate>Mon, 22 Apr 2024 00:00:00 GMT</pubDate>
       <description>&amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; What is it to think of prayer? The first images that come to me are of kneeling in church and of reciting cre...</description>
+      
     </item>
     <item>
       <title>Life is a Story</title>
@@ -20,6 +21,7 @@
       <guid>https://henrythinks.com/posts/life-is-a-story</guid>
       <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
       <description></description>
+      <media:content url="https://henrythinks.comhttps://i.etsystatic.com/38048886/r/il/757c74/4615360150/il_fullxfull.4615360150_eqfq.jpg" medium="image" />
     </item>
     <item>
       <title>The Climb of Worship</title>
@@ -27,6 +29,7 @@
       <guid>https://henrythinks.com/posts/the-climb-of-worship</guid>
       <pubDate>Thu, 04 Jul 2024 00:00:00 GMT</pubDate>
       <description>&quot;I would rather be in the mountains thinking of God than in church thinking of mountains&quot;</description>
+      <media:content url="https://henrythinks.comhttps://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_jOoHMwC7GntBHNw9H6W-TplwD1Epd3IACe7C4GUQnZErKxBEo893l3WE0NJVrIp_YXD-8urdMPYnkPvwZLyB8u-zDxIwySa5wHkNXiL3O26XzTXSSU4JnhOZabAZuq-quBSbQy0FW9xoGumsPD-JrjGhpfJb-tg4zZIixH3U-WbTtgGnBMC_ND8EY8eZ/w640-h480/flower%20mountain.JPG" medium="image" />
     </item>
     <item>
       <title>Waking in Woods: A Poem</title>
@@ -34,6 +37,7 @@
       <guid>https://henrythinks.com/posts/waking-in-woods-a-poem</guid>
       <pubDate>Thu, 20 Jun 2024 00:00:00 GMT</pubDate>
       <description>To rise in the morning and breath cool fresh air the smell of smoke lingering on tent, shirt and hair an empty bottle of whiskey lying somewhere over...</description>
+      <media:content url="https://henrythinks.comhttps://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjNU6d9Vvy4Z_-bKwXr0UJW_g7_ojnY_NY26P3io9FGekWd65ZAMMbLcUyVxJB8vBtIC7pP4p3vGeW5gUWZ5BFx058pFyoXtaSf3CPUc-dbWt_WUnYX5g96a7flzAXWOIyq2gZn8Y8CUCVDb8Sf03BZTnfTqrwHszoJhfGOYxQxmbNdnc8PzAVapbgVh2mu/w640-h480/Drinking%20in%20the%20woods.JPG" medium="image" />
     </item>
     <item>
       <title>Today I Climbed a Tree: A Short Poem</title>
@@ -41,6 +45,7 @@
       <guid>https://henrythinks.com/posts/today-i-climbed-a-tree-a-short-poem</guid>
       <pubDate>Wed, 19 Jun 2024 00:00:00 GMT</pubDate>
       <description></description>
+      <media:content url="https://henrythinks.comhttps://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjM2u9Yq-C5F7taS3ZbOer8nLSYd3pzgQrccwltP1-AhdWByxQq-zN_XOzzTCbdDawLYWqUnOqDLDENaQwS6LqwEgbOrqk0YKfayA6_SWSIzOvPG2NACat5SrHhM5L9chsqWMKV_MkyGeUBxjismYdf_xRuIm5IBtcdyubu7WYSd8HaLQEe3CQ57gdIfA3F/w480-h640/In%20a%20tree.JPG" medium="image" />
     </item>
     <item>
       <title>What is Education</title>
@@ -48,6 +53,7 @@
       <guid>https://henrythinks.com/posts/what-is-education</guid>
       <pubDate>Tue, 12 Mar 2024 00:00:00 GMT</pubDate>
       <description></description>
+      
     </item>
     <item>
       <title>Koon Studies (The Study of Life the Universe and Everything)//What I thought it was</title>
@@ -55,6 +61,7 @@
       <guid>https://henrythinks.com/posts/koon-studies-the-study-of-life-the-universe-and-ev</guid>
       <pubDate>Wed, 28 Feb 2024 00:00:00 GMT</pubDate>
       <description></description>
+      
     </item>
     <item>
       <title>The Calling: A Poem</title>
@@ -62,6 +69,7 @@
       <guid>https://henrythinks.com/posts/the-calling-a-poem</guid>
       <pubDate>Mon, 29 Jan 2024 00:00:00 GMT</pubDate>
       <description></description>
+      <media:content url="https://henrythinks.comhttps://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoNJdzYOWNtOsqMU2fyW0rkanTkloGt6uFWOdtIblWsKXvwUBY0-MrP55Kwy9Mu14oIHXM2jNYKHvpX4-1Q6IoKkeQlJ8_gyDR_7TMOkUH1Fb3H3ix2kK2BTk8DnfB4Bnt9ySxf2RyyDbpDYTKiDyxlZVyVhyphenhyphennenN8NJuZ48ud4f7KyNQgP4wkEJ4WHz5a/s2000/4d1f992a-308e-5cdc-a33b-43f9ad5f9405.jpg" medium="image" />
     </item>
     <item>
       <title>Lost at Sea: A Poem</title>
@@ -69,6 +77,7 @@
       <guid>https://henrythinks.com/posts/lost-at-sea-a-poem</guid>
       <pubDate>Fri, 08 Dec 2023 00:00:00 GMT</pubDate>
       <description></description>
+      
     </item>
     <item>
       <title>Watching from the Bottom: A (meanish) Poem</title>
@@ -76,6 +85,7 @@
       <guid>https://henrythinks.com/posts/watching-from-the-bottom-a-meanish-poem</guid>
       <pubDate>Tue, 20 May 1902 22:20:00 GMT</pubDate>
       <description></description>
+      <media:content url="https://henrythinks.comhttps://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoWnftg7Jt4uO1wvixSwCI0tRWNoC_Yi7vJCYlk2lbjdPzNbvOY_d1OBWRi5mMl2IvIGaRFzRjzUlQe0LrScjysjyeo75qLjolxeIXtlAcoe8jdBx_IJBMn6MbShW6BJq1Ro3mibzaxLOOIkykLM3355IN6Bc5PZSW_GribtK21LVjay989vrE3WtJ8_JJ/w480-h640/badass%20feet.JPG" medium="image" />
     </item>
   </channel>
 </rss>

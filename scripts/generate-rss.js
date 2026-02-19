@@ -23,6 +23,7 @@ function getAllPosts() {
         title: data.title || slug,
         date: data.date || '',
         excerpt: data.excerpt || '',
+        coverImage: data.coverImage || null,
       };
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -41,7 +42,7 @@ const posts = getAllPosts();
 const siteUrl = 'https://henrythinks.com';
 
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Henry Koon Thinks</title>
     <link>${siteUrl}</link>
@@ -57,6 +58,7 @@ const rss = `<?xml version="1.0" encoding="UTF-8"?>
       <guid>${siteUrl}/posts/${post.slug}</guid>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <description>${escapeXml(post.excerpt || '')}</description>
+      ${post.coverImage ? `<media:content url="${siteUrl}${post.coverImage}" medium="image" />` : ''}
     </item>`
       )
       .join('')}
