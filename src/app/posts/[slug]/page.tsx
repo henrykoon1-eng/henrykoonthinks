@@ -1,7 +1,7 @@
 import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import AnonymousComments from '@/components/AnonymousComments';
+import DisqusComments from '@/components/DisqusComments';
 
 interface PostPageProps {
   params: { slug: string };
@@ -87,7 +87,7 @@ export default async function PostPage({ params }: PostPageProps) {
       />
 
       {/* Comments */}
-      <AnonymousComments postSlug={params.slug} />
+      <DisqusComments postSlug={params.slug} postTitle={post.title} />
 
       {/* Back Link */}
       <div className="mt-12 pt-8 border-t border-stone-200">
