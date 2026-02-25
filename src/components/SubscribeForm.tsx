@@ -1,38 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function SubscribeForm() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    try {
-      // Mailchimp embedded form submission
-      const formData = new FormData();
-      formData.append('EMAIL', email);
-      formData.append('u', '12ad0b551709289557e47fad5');
-      formData.append('id', 'abe7c58a76');
-      
-      await fetch('https://henrykoonthinks.us9.list-manage.com/subscribe/post', {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors',
-      });
-
-      // Since no-cors doesn't give us response details, assume success
-      setStatus('success');
-      setMessage("You're in. Check your inbox to confirm your subscription.");
-      setEmail('');
-    } catch {
-      setStatus('error');
-      setMessage('Something went wrong. Try again.');
+  useEffect(() => {
+    // Load MailerLite universal script
+    if (typeof window !== 'undefined' && !(window as any).ml) {
+      (function(w: any, d: Document, e: string, u: string, f: string) {
+        w[f] = w[f] || function() {
+          (w[f].q = w[f].q || []).push(arguments);
+        };
+        const l = d.createElement(e) as HTMLScriptElement;
+        l.async = true;
+        l.src = u;
+        const n = d.getElementsByTagName(e)[0];
+        n.parentNode?.insertBefore(l, n);
+      })(window, document, 'script', 'https://assets.mailerlite.com/js/universal.js', 'ml');
+      (window as any).ml('account', '2143341');
     }
-  };
+  }, []);
 
   return (
     <section className="bg-stone-800 border-t border-stone-700">
@@ -45,29 +31,7 @@ export default function SubscribeForm() {
         <p className="text-stone-400 text-sm mb-6">
           Get new posts delivered straight to your inbox. No spam, just thoughts.
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            className="flex-1 px-4 py-3 bg-stone-900 border border-stone-600 text-stone-100 placeholder-stone-500 focus:outline-none focus:border-brand-400 transition-colors text-sm"
-            disabled={status === 'loading'}
-          />
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="px-6 py-3 bg-stone-100 text-stone-900 font-medium text-sm uppercase tracking-wider hover:bg-brand-300 transition-colors disabled:opacity-50"
-          >
-            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
-          </button>
-        </form>
-        {message && (
-          <p className={`mt-4 text-sm ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-            {message}
-          </p>
-        )}
+        <div className="ml-embedded" data-form="180410029724141364"></div>
       </div>
     </section>
   );
