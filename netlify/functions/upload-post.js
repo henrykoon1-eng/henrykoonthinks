@@ -61,21 +61,40 @@ exports.handler = async (event) => {
   }
 
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
+    return {
+      statusCode: 405,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ error: 'Method not allowed' }),
+    };
   }
 
   // Simple password check
   const authHeader = event.headers['authorization'] || '';
   const expectedPassword = process.env.UPLOAD_PASSWORD;
-  if (!expectedPassword || authHeader !== `Bearer ${expectedPassword}`) {
-    return { statusCode: 401, body: 'Unauthorized' };
+  if (!expectedPassword) {
+    return {
+      statusCode: 500,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ error: 'UPLOAD_PASSWORD not set in Netlify environment variables.' }),
+    };
+  }
+  if (authHeader !== `Bearer ${expectedPassword}`) {
+    return {
+      statusCode: 401,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ error: 'Wrong password. Please try again.' }),
+    };
   }
 
   try {
     const { fields, fileBuffer, fileName } = await parseMultipart(event);
 
     if (!fileBuffer) {
-      return { statusCode: 400, body: 'No file uploaded' };
+      return {
+        statusCode: 400,
+        headers: { 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({ error: 'No file uploaded' }),
+      };
     }
 
     const title = fields.title || fileName.replace(/\.docx?$/i, '');

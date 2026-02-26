@@ -314,7 +314,13 @@
           body: formData,
         });
 
-        const data = await res.json();
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch {
+          data = { error: text || 'Unknown error (status ' + res.status + ')' };
+        }
 
         if (res.ok && data.success) {
           statusEl.className = 'status success';
@@ -324,7 +330,7 @@
           fileNameEl.textContent = '';
         } else {
           statusEl.className = 'status error';
-          statusEl.textContent = data.error || 'Something went wrong.';
+          statusEl.textContent = data.error || 'Something went wrong (status ' + res.status + ')';
         }
       } catch (err) {
         statusEl.className = 'status error';
