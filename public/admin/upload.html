@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Upload Post — Henry Koon Thinks</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1c1917;
+      color: #e7e5e4;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      width: 100%;
+      background: #0c0a09;
+      border-bottom: 1px solid #292524;
+      padding: 16px 24px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #f5f5f4;
+    }
+    header a {
+      color: #a8a29e;
+      font-size: 13px;
+      text-decoration: none;
+      margin-top: 4px;
+      display: inline-block;
+    }
+    header a:hover { color: #f5f5f4; }
+    .container {
+      max-width: 560px;
+      width: 100%;
+      padding: 40px 24px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a8a29e;
+      margin-bottom: 6px;
+    }
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      background: #0c0a09;
+      border: 1px solid #44403c;
+      border-radius: 4px;
+      color: #f5f5f4;
+      font-size: 14px;
+      font-family: inherit;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #78716c;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    select { cursor: pointer; }
+
+    .file-drop {
+      border: 2px dashed #44403c;
+      border-radius: 8px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .file-drop:hover, .file-drop.dragover {
+      border-color: #78716c;
+      background: rgba(255,255,255,0.03);
+    }
+    .file-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .file-drop .icon { font-size: 36px; margin-bottom: 8px; }
+    .file-drop .label { color: #a8a29e; font-size: 14px; }
+    .file-drop .filename {
+      color: #f5f5f4;
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background: #f5f5f4;
+      color: #1c1917;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button[type="submit"]:hover { background: #d6d3d1; }
+    button[type="submit"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: none;
+    }
+    .status.success {
+      display: block;
+      background: #14532d;
+      color: #86efac;
+      border: 1px solid #166534;
+    }
+    .status.error {
+      display: block;
+      background: #450a0a;
+      color: #fca5a5;
+      border: 1px solid #7f1d1d;
+    }
+    .status.loading {
+      display: block;
+      background: #1e1b4b;
+      color: #a5b4fc;
+      border: 1px solid #312e81;
+    }
+
+    .login-gate {
+      max-width: 360px;
+      width: 100%;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .login-gate input {
+      width: 100%;
+      padding: 10px 12px;
+      background: #0c0a09;
+      border: 1px solid #44403c;
+      border-radius: 4px;
+      color: #f5f5f4;
+      font-size: 14px;
+      margin-bottom: 12px;
+      outline: none;
+      text-align: center;
+    }
+    .login-gate button {
+      width: 100%;
+      padding: 12px;
+      background: #f5f5f4;
+      color: #1c1917;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Upload Post</h1>
+    <a href="/admin/">← Back to CMS</a>
+  </header>
+
+  <!-- Login gate -->
+  <div class="login-gate" id="loginGate">
+    <h2 style="font-size:18px; margin-bottom:12px;">Enter Password</h2>
+    <input type="password" id="passwordInput" placeholder="Upload password" />
+    <button onclick="doLogin()">Enter</button>
+  </div>
+
+  <!-- Upload form (hidden until logged in) -->
+  <div class="container" id="uploadForm" style="display:none;">
+    <h2>New Post</h2>
+    <form id="postForm">
+      <label for="title">Title *</label>
+      <input type="text" id="title" name="title" required placeholder="My New Post" />
+
+      <label for="category">Category *</label>
+      <select id="category" name="category">
+        <option value="life">Life</option>
+        <option value="faith">Faith</option>
+        <option value="essays">Essays</option>
+        <option value="the-outdoors">The Outdoors</option>
+        <option value="poetry">Poetry</option>
+        <option value="reviews">Reviews</option>
+      </select>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" />
+
+      <label for="excerpt">Excerpt</label>
+      <textarea id="excerpt" name="excerpt" placeholder="A short summary of your post..."></textarea>
+
+      <label for="coverImage">Cover Image URL (optional)</label>
+      <input type="text" id="coverImage" name="coverImage" placeholder="https://..." />
+
+      <label>Document (.docx) *</label>
+      <div class="file-drop" id="fileDrop">
+        <input type="file" id="fileInput" accept=".docx,.doc" required />
+        <div class="icon">📄</div>
+        <div class="label">Drag & drop your .docx file here, or click to browse</div>
+        <div class="filename" id="fileName"></div>
+      </div>
+
+      <button type="submit" id="submitBtn">Publish Post</button>
+    </form>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    // Default date to today
+    document.getElementById('date').valueAsDate = new Date();
+
+    let uploadPassword = '';
+
+    function doLogin() {
+      const pw = document.getElementById('passwordInput').value;
+      if (pw) {
+        uploadPassword = pw;
+        document.getElementById('loginGate').style.display = 'none';
+        document.getElementById('uploadForm').style.display = 'block';
+      }
+    }
+
+    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    // File drop visual feedback
+    const fileDrop = document.getElementById('fileDrop');
+    const fileInput = document.getElementById('fileInput');
+    const fileNameEl = document.getElementById('fileName');
+
+    fileDrop.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      fileDrop.classList.add('dragover');
+    });
+    fileDrop.addEventListener('dragleave', () => {
+      fileDrop.classList.remove('dragover');
+    });
+    fileDrop.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileDrop.classList.remove('dragover');
+      if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        fileNameEl.textContent = e.dataTransfer.files[0].name;
+      }
+    });
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        fileNameEl.textContent = fileInput.files[0].name;
+      }
+    });
+
+    // Form submission
+    document.getElementById('postForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const statusEl = document.getElementById('status');
+      const submitBtn = document.getElementById('submitBtn');
+
+      statusEl.className = 'status loading';
+      statusEl.textContent = 'Uploading and publishing...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('title', document.getElementById('title').value);
+      formData.append('category', document.getElementById('category').value);
+      formData.append('date', document.getElementById('date').value);
+      formData.append('excerpt', document.getElementById('excerpt').value);
+      formData.append('coverImage', document.getElementById('coverImage').value);
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const res = await fetch('/.netlify/functions/upload-post', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + uploadPassword,
+          },
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          statusEl.className = 'status success';
+          statusEl.textContent = data.message;
+          document.getElementById('postForm').reset();
+          document.getElementById('date').valueAsDate = new Date();
+          fileNameEl.textContent = '';
+        } else {
+          statusEl.className = 'status error';
+          statusEl.textContent = data.error || 'Something went wrong.';
+        }
+      } catch (err) {
+        statusEl.className = 'status error';
+        statusEl.textContent = 'Network error: ' + err.message;
+      }
+
+      submitBtn.disabled = false;
+    });
+  </script>
+</body>
+</html>
