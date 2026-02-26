@@ -1,6 +1,6 @@
 ---
 title: "Book Review: All The Pretty Horses"
-category: essays
+category: reviews
 date: 2026-02-19
 excerpt: ""
 coverImage: https://m.media-amazon.com/images/I/716XjGV8m7L._AC_UF1000,1000_QL80_.jpg
