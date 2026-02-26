@@ -2,7 +2,7 @@
 title: The Vast and Singular Christ
 category: faith
 date: 2026-02-25
-coverImage: https://media.cntraveler.com/photos/57f66c4fed4dcfe84d3222a3/16:9/w_2560%2Cc_limit/GettyImages-148274647.jpg
+coverImage: https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/The_Triumph_Of_Christianity_Over_Paganism.Gustave_Dor%C3%A9.jpg/960px-The_Triumph_Of_Christianity_Over_Paganism.Gustave_Dor%C3%A9.jpg
 draft: false
 ---
 
