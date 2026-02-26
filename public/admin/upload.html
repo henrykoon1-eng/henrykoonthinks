@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Upload Post — Henry Koon Thinks</title>
+  <script src="https://unpkg.com/mammoth@1.8.0/mammoth.browser.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -60,6 +61,7 @@
     }
     input[type="text"],
     input[type="date"],
+    input[type="password"],
     select,
     textarea {
       width: 100%;
@@ -109,7 +111,7 @@
       margin-top: 8px;
     }
 
-    button[type="submit"] {
+    button[type="submit"], .login-btn {
       width: 100%;
       padding: 14px;
       background: #f5f5f4;
@@ -123,7 +125,7 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    button[type="submit"]:hover { background: #d6d3d1; }
+    button[type="submit"]:hover, .login-btn:hover { background: #d6d3d1; }
     button[type="submit"]:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -161,31 +163,6 @@
       padding: 40px 24px;
       text-align: center;
     }
-    .login-gate input {
-      width: 100%;
-      padding: 10px 12px;
-      background: #0c0a09;
-      border: 1px solid #44403c;
-      border-radius: 4px;
-      color: #f5f5f4;
-      font-size: 14px;
-      margin-bottom: 12px;
-      outline: none;
-      text-align: center;
-    }
-    .login-gate button {
-      width: 100%;
-      padding: 12px;
-      background: #f5f5f4;
-      color: #1c1917;
-      border: none;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -194,11 +171,12 @@
     <a href="/admin/">← Back to CMS</a>
   </header>
 
-  <!-- Login gate -->
+  <!-- Login gate — asks for GitHub token -->
   <div class="login-gate" id="loginGate">
-    <h2 style="font-size:18px; margin-bottom:12px;">Enter Password</h2>
-    <input type="password" id="passwordInput" placeholder="Upload password" />
-    <button onclick="doLogin()">Enter</button>
+    <h2 style="font-size:18px; margin-bottom:12px;">Enter GitHub Token</h2>
+    <p style="color:#a8a29e; font-size:13px; margin-bottom:16px;">Your fine-grained personal access token</p>
+    <input type="password" id="tokenInput" placeholder="github_pat_..." />
+    <button class="login-btn" onclick="doLogin()">Enter</button>
   </div>
 
   <!-- Upload form (hidden until logged in) -->
@@ -242,36 +220,31 @@
   </div>
 
   <script>
-    // Default date to today
     document.getElementById('date').valueAsDate = new Date();
 
-    let uploadPassword = '';
+    const REPO = 'henrykoon1-eng/henrykoonthinks';
+    let githubToken = '';
 
     function doLogin() {
-      const pw = document.getElementById('passwordInput').value;
-      if (pw) {
-        uploadPassword = pw;
+      const token = document.getElementById('tokenInput').value.trim();
+      if (token) {
+        githubToken = token;
         document.getElementById('loginGate').style.display = 'none';
         document.getElementById('uploadForm').style.display = 'block';
       }
     }
 
-    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+    document.getElementById('tokenInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') doLogin();
     });
 
-    // File drop visual feedback
+    // File drop
     const fileDrop = document.getElementById('fileDrop');
     const fileInput = document.getElementById('fileInput');
     const fileNameEl = document.getElementById('fileName');
 
-    fileDrop.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      fileDrop.classList.add('dragover');
-    });
-    fileDrop.addEventListener('dragleave', () => {
-      fileDrop.classList.remove('dragover');
-    });
+    fileDrop.addEventListener('dragover', (e) => { e.preventDefault(); fileDrop.classList.add('dragover'); });
+    fileDrop.addEventListener('dragleave', () => { fileDrop.classList.remove('dragover'); });
     fileDrop.addEventListener('drop', (e) => {
       e.preventDefault();
       fileDrop.classList.remove('dragover');
@@ -281,10 +254,49 @@
       }
     });
     fileInput.addEventListener('change', () => {
-      if (fileInput.files.length) {
-        fileNameEl.textContent = fileInput.files[0].name;
-      }
+      if (fileInput.files.length) fileNameEl.textContent = fileInput.files[0].name;
     });
+
+    function slugify(text) {
+      return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+
+    function htmlToMarkdown(html) {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+
+      let md = '';
+
+      function walk(node) {
+        for (const child of node.childNodes) {
+          if (child.nodeType === 3) {
+            md += child.textContent;
+          } else if (child.nodeType === 1) {
+            const tag = child.tagName.toLowerCase();
+            if (tag === 'h1') { md += '\n\n# ' + child.textContent.trim() + '\n\n'; }
+            else if (tag === 'h2') { md += '\n\n## ' + child.textContent.trim() + '\n\n'; }
+            else if (tag === 'h3') { md += '\n\n### ' + child.textContent.trim() + '\n\n'; }
+            else if (tag === 'p') { md += '\n\n'; walk(child); md += '\n\n'; }
+            else if (tag === 'br') { md += '\n'; }
+            else if (tag === 'strong' || tag === 'b') { md += '**'; walk(child); md += '**'; }
+            else if (tag === 'em' || tag === 'i') { md += '*'; walk(child); md += '*'; }
+            else if (tag === 'a') { md += '['; walk(child); md += '](' + (child.getAttribute('href') || '') + ')'; }
+            else if (tag === 'ul' || tag === 'ol') { md += '\n'; walk(child); md += '\n'; }
+            else if (tag === 'li') {
+              const parentTag = child.parentElement ? child.parentElement.tagName.toLowerCase() : 'ul';
+              md += parentTag === 'ol' ? '1. ' : '- ';
+              walk(child);
+              md += '\n';
+            }
+            else if (tag === 'blockquote') { md += '\n\n> '; walk(child); md += '\n\n'; }
+            else { walk(child); }
+          }
+        }
+      }
+
+      walk(div);
+      return md.replace(/\n{3,}/g, '\n\n').trim();
+    }
 
     // Form submission
     document.getElementById('postForm').addEventListener('submit', async (e) => {
@@ -294,47 +306,88 @@
       const submitBtn = document.getElementById('submitBtn');
 
       statusEl.className = 'status loading';
-      statusEl.textContent = 'Uploading and publishing...';
+      statusEl.textContent = 'Converting document...';
       submitBtn.disabled = true;
 
-      const formData = new FormData();
-      formData.append('title', document.getElementById('title').value);
-      formData.append('category', document.getElementById('category').value);
-      formData.append('date', document.getElementById('date').value);
-      formData.append('excerpt', document.getElementById('excerpt').value);
-      formData.append('coverImage', document.getElementById('coverImage').value);
-      formData.append('file', fileInput.files[0]);
-
       try {
-        const res = await fetch('/.netlify/functions/upload-post', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + uploadPassword,
-          },
-          body: formData,
-        });
+        const title = document.getElementById('title').value;
+        const category = document.getElementById('category').value;
+        const date = document.getElementById('date').value;
+        const excerpt = document.getElementById('excerpt').value;
+        const coverImage = document.getElementById('coverImage').value;
+        const file = fileInput.files[0];
 
-        const text = await res.text();
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch {
-          data = { error: text || 'Unknown error (status ' + res.status + ')' };
+        if (!file) throw new Error('No file selected');
+
+        // Read file as ArrayBuffer
+        const arrayBuffer = await file.arrayBuffer();
+
+        // Convert .docx to HTML using mammoth
+        statusEl.textContent = 'Converting .docx to markdown...';
+        const result = await mammoth.convertToHtml({ arrayBuffer });
+        const markdown = htmlToMarkdown(result.value);
+
+        // Build frontmatter
+        const slug = slugify(title);
+        const lines = [
+          '---',
+          'title: "' + title.replace(/"/g, '\\"') + '"',
+          'date: "' + date + '"',
+          'category: "' + category + '"',
+          'excerpt: "' + excerpt.replace(/"/g, '\\"') + '"',
+        ];
+        if (coverImage) lines.push('coverImage: "' + coverImage + '"');
+        lines.push('---');
+
+        const fileContent = lines.join('\n') + '\n\n' + markdown;
+        const filePath = 'content/posts/' + slug + '.md';
+
+        // Check if file exists on GitHub
+        statusEl.textContent = 'Publishing to GitHub...';
+        const checkRes = await fetch(
+          'https://api.github.com/repos/' + REPO + '/contents/' + filePath,
+          { headers: { 'Authorization': 'token ' + githubToken, 'Accept': 'application/vnd.github.v3+json' } }
+        );
+
+        const body = {
+          message: 'Add post: ' + title,
+          content: btoa(unescape(encodeURIComponent(fileContent))),
+          branch: 'main',
+        };
+
+        if (checkRes.ok) {
+          const existing = await checkRes.json();
+          body.sha = existing.sha;
+          body.message = 'Update post: ' + title;
         }
 
-        if (res.ok && data.success) {
-          statusEl.className = 'status success';
-          statusEl.textContent = data.message;
-          document.getElementById('postForm').reset();
-          document.getElementById('date').valueAsDate = new Date();
-          fileNameEl.textContent = '';
-        } else {
-          statusEl.className = 'status error';
-          statusEl.textContent = data.error || 'Something went wrong (status ' + res.status + ')';
+        const commitRes = await fetch(
+          'https://api.github.com/repos/' + REPO + '/contents/' + filePath,
+          {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'token ' + githubToken,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        if (!commitRes.ok) {
+          const errData = await commitRes.json().catch(() => ({}));
+          throw new Error(errData.message || 'GitHub returned status ' + commitRes.status);
         }
+
+        statusEl.className = 'status success';
+        statusEl.textContent = 'Post "' + title + '" published! Netlify will redeploy in ~1 minute.';
+        document.getElementById('postForm').reset();
+        document.getElementById('date').valueAsDate = new Date();
+        fileNameEl.textContent = '';
+
       } catch (err) {
         statusEl.className = 'status error';
-        statusEl.textContent = 'Network error: ' + err.message;
+        statusEl.textContent = 'Error: ' + err.message;
       }
 
       submitBtn.disabled = false;
