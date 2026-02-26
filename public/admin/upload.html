@@ -267,34 +267,41 @@
 
       let md = '';
 
-      function walk(node) {
+      function cleanText(text) {
+        return text.replace(/[\t\u00A0]+/g, ' ').replace(/ {2,}/g, ' ');
+      }
+
+      function walk(node, insideBlock) {
         for (const child of node.childNodes) {
           if (child.nodeType === 3) {
-            md += child.textContent;
+            let text = cleanText(child.textContent);
+            if (!insideBlock) text = text.trim();
+            md += text;
           } else if (child.nodeType === 1) {
             const tag = child.tagName.toLowerCase();
-            if (tag === 'h1') { md += '\n\n# ' + child.textContent.trim() + '\n\n'; }
-            else if (tag === 'h2') { md += '\n\n## ' + child.textContent.trim() + '\n\n'; }
-            else if (tag === 'h3') { md += '\n\n### ' + child.textContent.trim() + '\n\n'; }
-            else if (tag === 'p') { md += '\n\n'; walk(child); md += '\n\n'; }
+            if (tag === 'h1') { md += '\n\n# ' + cleanText(child.textContent).trim() + '\n\n'; }
+            else if (tag === 'h2') { md += '\n\n## ' + cleanText(child.textContent).trim() + '\n\n'; }
+            else if (tag === 'h3') { md += '\n\n### ' + cleanText(child.textContent).trim() + '\n\n'; }
+            else if (tag === 'h4') { md += '\n\n#### ' + cleanText(child.textContent).trim() + '\n\n'; }
+            else if (tag === 'p') { md += '\n\n'; walk(child, true); md += '\n\n'; }
             else if (tag === 'br') { md += '\n'; }
-            else if (tag === 'strong' || tag === 'b') { md += '**'; walk(child); md += '**'; }
-            else if (tag === 'em' || tag === 'i') { md += '*'; walk(child); md += '*'; }
-            else if (tag === 'a') { md += '['; walk(child); md += '](' + (child.getAttribute('href') || '') + ')'; }
-            else if (tag === 'ul' || tag === 'ol') { md += '\n'; walk(child); md += '\n'; }
+            else if (tag === 'strong' || tag === 'b') { md += '**'; walk(child, true); md += '**'; }
+            else if (tag === 'em' || tag === 'i') { md += '*'; walk(child, true); md += '*'; }
+            else if (tag === 'a') { md += '['; walk(child, true); md += '](' + (child.getAttribute('href') || '') + ')'; }
+            else if (tag === 'ul' || tag === 'ol') { md += '\n'; walk(child, false); md += '\n'; }
             else if (tag === 'li') {
               const parentTag = child.parentElement ? child.parentElement.tagName.toLowerCase() : 'ul';
               md += parentTag === 'ol' ? '1. ' : '- ';
-              walk(child);
+              walk(child, true);
               md += '\n';
             }
-            else if (tag === 'blockquote') { md += '\n\n> '; walk(child); md += '\n\n'; }
-            else { walk(child); }
+            else if (tag === 'blockquote') { md += '\n\n> '; walk(child, true); md += '\n\n'; }
+            else { walk(child, insideBlock); }
           }
         }
       }
 
-      walk(div);
+      walk(div, false);
       return md.replace(/\n{3,}/g, '\n\n').trim();
     }
 
@@ -314,7 +321,10 @@
         const category = document.getElementById('category').value;
         const date = document.getElementById('date').value;
         const excerpt = document.getElementById('excerpt').value;
-        const coverImage = document.getElementById('coverImage').value;
+        let coverImage = document.getElementById('coverImage').value.trim();
+        if (coverImage && !coverImage.startsWith('http')) {
+          throw new Error('Cover Image must be a URL starting with http:// or https://');
+        }
         const file = fileInput.files[0];
 
         if (!file) throw new Error('No file selected');
