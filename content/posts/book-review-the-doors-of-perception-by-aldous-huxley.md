@@ -7,17 +7,19 @@ excerpt: Tonight I sat down and read The Doors of Perception and I must say I
 coverImage: https://m.media-amazon.com/images/I/71YiROLvTlL._SL1360_.jpg
 draft: false
 ---
-	Tonight I sat down and read *The Doors of Perception* and I must say I thoroughly enjoyed it.  Huxley is insightful, honest, and humble as he spends the 80 pages of the book describing his trip on mescaline and the revelations he had in his reflections upon it.
+Artists view is open to behold things invisible * visionary*  but the visualizer is able to share this in something that is common
 
- He touches on the true meaning of art, the nature of artistry, the vicious reality of sin as addiction, the solitary reality of the human experience, the role of memory in shaping our vision, and of course our ego.  
+Tonight I sat down and read *The Doors of Perception* and I must say I thoroughly enjoyed it.  Huxley is insightful, honest, and humble as he spends the 80 pages of the book describing his trip on mescalin and the revelations he had in his reflections upon it.
 
-	I have wrestled myself with the spiritual morality of taking psychedelic drugs, especially naturally occurring ones.  Only God can truly create, and they are creation, but so too were the fruit of the forbidden tree which also promised knowledge….
+He touches on the true meaning of art, the nature of artistry, the vicious reality of sin as addiction, the solitary reality of the human experience, the role of memory in shaping our vision, and of course our ego.  
 
-	Huxley is by no means a Christian but is honest and reverent to it here and has helped me clarify incoherent thoughts I have been unable to articulate previously. 
+I have wrestled myself with the spiritual morality of taking psychedelic drugs, especially naturally occurring ones.  Only God can truly create, and they are creation, but so too were the fruit of the forbidden tree which also promised knowledge….
+
+Huxley is by no means a Christian but is honest and reverent to it here and has helped me clarify incoherent thoughts I have been unable to articulate previously. 
 
  
 
-	This book is absolutely worth the evening it takes to read even if (maybe especially if) you have no history or intention of psychedelic use. 
+This book is absolutely worth the evening it takes to read even if (maybe especially if) you have no history or intention of psychedelic use. 
 
 5/5
 
@@ -33,7 +35,7 @@ Huxley begins his thoughts with the acute and often dismissed fact that no two p
 
 ***P.12***
 
-Then he begins to think about our inability to think and communicate without words, symbols and systems.  It is these creations which allow us to become more than savages, but they are also our mental cage.  {The Greeks for instance didn't have a word for blue, and so they called the sea grey and for lack of words to describe it, never developed the ability to appreciate the color of the glistening sea from that of a storm cloud} Our structure of thinking becomes our only way of being
+Then he begins to think about our inability to think and communicate without words, symbols and systems.  It is these creations which allow us to become more than savages, but they are also our mental cage.  {The greeks for instance didn't have a word for blue, and so they called the sea grey and for lack of words to describe it, never developed the ability to appreciate the color of the glistening sea from that of a stormcloud} Our structure of thinking becomes our only way of being
 
 ***“Every individual is at once the beneficiary and the victim of the linguistic tradition into which he has been born”***
 
@@ -77,17 +79,11 @@ When asked what fantastic wonder he can discover within his own mind, Huxley cla
 
 ***P.49***
 
+Huxley argues that much of human substance abuse is a result of inability to find a truly spiritual experience in their religion whether it is their fault or not. I’m not sure what I make of this, although as anyone who’s been to AA knows the only way out of addiction is inherently spiritual.  Something about that urge is truly spiritual…
+
 ***“When for whatever reason, men and women fail to transcend themselves by means of worship, good works and spiritual exercises, they are apt to resort to religion’s chemical surrogates—alcohol and “goof pills”***
 
 ***P.67***
-
-***“The effective object of worship is the bottle and the sole religious experience is that state of uninhibited and belligerent euphoria which follows the ingestion of the third cocktail.”***
-
-***P.69***
-
-***“All I am suggesting is that the mescalin experience is what the Catholic theologians call a “gratuitous grace”, not necessary to salvation but potentially helpful and to be accepted thankfully, if made available.”***
-
-***P.73***
 
 The true climax of his realization is functional, it is that we do not actually see the world.  So too we cannot think of all that we know, or acknowledge all that we might sense.  And so, for survival we limit our minds to what is functional.  Huxley says that ‘we slow the valve of what is available to our *Mind at Large* to only the trickle, to only what is necessary for survival’  In so doing this we do not really *see,* or *experience* and so we are not struck with wonder at existence and creation.  We are saved the “wonder” by seeing only memories, things categorized into shapes made vague enough to be used without overwhelming.  
 
@@ -98,5 +94,13 @@ The true climax of his realization is functional, it is that we do not actually 
 And so, imperfectly, he claims that his psycho active dose of mescaline reverted him back to seeing for the first time; to wonder to goodness, to the being itself of each thing.  
 
 Anyways, read the book, its fun!!
+
+
+
+
+
+
+
+
 
 I will write again of this problem of the cloud of our memory; poetry, fantasy and all true art may be some remedy.
