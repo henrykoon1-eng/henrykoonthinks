@@ -15,10 +15,10 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.animate-scroll {
-  animation: scroll 96s linear infinite;
+.scroll-strip {
+  animation: scroll linear infinite;
 }
-.animate-scroll:hover {
+.scroll-strip:hover {
   animation-play-state: paused;
 }
 

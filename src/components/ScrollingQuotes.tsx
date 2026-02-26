@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 
 interface Quote {
   text: string;
@@ -18,13 +18,29 @@ function shuffle<T>(arr: T[]): T[] {
   return [...arr].sort(() => Math.random() - 0.5);
 }
 
+// Pixels per second — lower = slower
+const SCROLL_SPEED = 30;
+
 export default function ScrollingQuotes({ quotes }: { quotes: Quote[] }) {
   const shuffled = useMemo(() => shuffle(quotes), [quotes]);
   const doubled = [...shuffled, ...shuffled];
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [duration, setDuration] = useState(120);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const halfWidth = scrollRef.current.scrollWidth / 2;
+      setDuration(halfWidth / SCROLL_SPEED);
+    }
+  }, [quotes]);
 
   return (
     <div className="overflow-hidden relative">
-      <div className="flex animate-scroll gap-8 w-max items-center">
+      <div
+        ref={scrollRef}
+        className="flex scroll-strip gap-8 w-max items-center"
+        style={{ animationDuration: `${duration}s` }}
+      >
         {doubled.map((q, i) => (
           <div
             key={i}
