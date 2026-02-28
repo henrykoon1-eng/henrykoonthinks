@@ -4,7 +4,7 @@ interface PostCardPost {
   slug: string;
   title: string;
   date: string;
-  category: string;
+  category: string | string[];
   excerpt: string;
   coverImage?: string;
 }
@@ -19,10 +19,11 @@ const categoryNames: Record<string, string> = {
   essays: 'Essays',
   'the-outdoors': 'The Outdoors',
   poetry: 'Poetry',
+  reviews: 'Reviews',
 };
 
 export default function PostCard({ post }: PostCardProps) {
-  const categoryDisplay = categoryNames[post.category] || post.category;
+  const cats = Array.isArray(post.category) ? post.category : [post.category];
 
   return (
     <article className="group bg-white border border-stone-200 overflow-hidden hover:shadow-lg hover:border-brand-300 transition-all duration-300">
@@ -37,12 +38,19 @@ export default function PostCard({ post }: PostCardProps) {
       )}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-3">
-          <Link
-            href={`/category/${post.category}`}
-            className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-600 hover:text-brand-800 transition-colors"
-          >
-            {categoryDisplay}
-          </Link>
+          <div className="flex items-center gap-1.5">
+            {cats.map((cat, i) => (
+              <span key={cat} className="flex items-center gap-1.5">
+                {i > 0 && <span className="text-stone-300">&middot;</span>}
+                <Link
+                  href={`/category/${cat}`}
+                  className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-600 hover:text-brand-800 transition-colors"
+                >
+                  {categoryNames[cat] || cat}
+                </Link>
+              </span>
+            ))}
+          </div>
           {post.date && (
             <span className="text-stone-300">|</span>
           )}

@@ -10,7 +10,7 @@ export interface PostData {
   slug: string;
   title: string;
   date: string;
-  category: string;
+  category: string | string[];
   excerpt: string;
   coverImage?: string;
   draft?: boolean;
@@ -63,7 +63,10 @@ export function getAllPosts(): PostData[] {
 }
 
 export function getPostsByCategory(category: string): PostData[] {
-  return getAllPosts().filter((post) => post.category === category);
+  return getAllPosts().filter((post) => {
+    const cats = Array.isArray(post.category) ? post.category : [post.category];
+    return cats.includes(category);
+  });
 }
 
 export function getAllPostSlugs(): string[] {

@@ -186,15 +186,15 @@
       <label for="title">Title *</label>
       <input type="text" id="title" name="title" required placeholder="My New Post" />
 
-      <label for="category">Category *</label>
-      <select id="category" name="category">
-        <option value="life">Life</option>
-        <option value="faith">Faith</option>
-        <option value="essays">Essays</option>
-        <option value="the-outdoors">The Outdoors</option>
-        <option value="poetry">Poetry</option>
-        <option value="reviews">Reviews</option>
-      </select>
+      <label>Category * <span style="font-weight:400; text-transform:none; letter-spacing:0;">(select one or more)</span></label>
+      <div id="categoryGroup" style="display:flex; flex-wrap:wrap; gap:8px 16px; margin-bottom:20px;">
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="life" checked> Life</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="faith"> Faith</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="essays"> Essays</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="the-outdoors"> The Outdoors</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="poetry"> Poetry</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="reviews"> Reviews</label>
+      </div>
 
       <label for="date">Date</label>
       <input type="date" id="date" name="date" />
@@ -318,7 +318,8 @@
 
       try {
         const title = document.getElementById('title').value;
-        const category = document.getElementById('category').value;
+        const checked = [...document.querySelectorAll('input[name="category"]:checked')].map(el => el.value);
+        if (checked.length === 0) throw new Error('Select at least one category');
         const date = document.getElementById('date').value;
         const excerpt = document.getElementById('excerpt').value;
         let coverImage = document.getElementById('coverImage').value.trim();
@@ -343,7 +344,8 @@
           '---',
           'title: "' + title.replace(/"/g, '\\"') + '"',
           'date: "' + date + '"',
-          'category: "' + category + '"',
+          'category:',
+          ...checked.map(c => '  - "' + c + '"'),
           'excerpt: "' + excerpt.replace(/"/g, '\\"') + '"',
         ];
         if (coverImage) lines.push('coverImage: "' + coverImage + '"');

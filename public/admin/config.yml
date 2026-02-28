@@ -20,6 +20,8 @@ collections:
       - label: "Category"
         name: "category"
         widget: "select"
+        multiple: true
+        min: 1
         options:
           - { label: "Life", value: "life" }
           - { label: "Faith", value: "faith" }
