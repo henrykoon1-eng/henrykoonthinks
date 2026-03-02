@@ -8,7 +8,7 @@ interface PostItem {
   slug: string;
   title: string;
   date: string;
-  category: string;
+  category: string | string[];
   excerpt: string;
   coverImage?: string;
 }
@@ -23,7 +23,10 @@ export default function FilteredPosts({ posts, categories, categoryMap }: Filter
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filtered = activeCategory
-    ? posts.filter((p) => p.category === activeCategory)
+    ? posts.filter((p) => {
+        const cats = Array.isArray(p.category) ? p.category : [p.category];
+        return cats.includes(activeCategory);
+      })
     : posts;
 
   return (
@@ -70,7 +73,7 @@ export default function FilteredPosts({ posts, categories, categoryMap }: Filter
             <article className="group relative bg-stone-900 overflow-hidden">
               <div className="p-8 sm:p-12">
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-400 mb-3 block">
-                  {categoryMap[filtered[0].category] || filtered[0].category}
+                  {(Array.isArray(filtered[0].category) ? filtered[0].category : [filtered[0].category]).map(c => categoryMap[c] || c).join(' · ')}
                 </span>
                 <Link href={`/posts/${filtered[0].slug}`}>
                   <h3 className="text-2xl sm:text-3xl font-bold text-stone-100 mb-4 group-hover:text-brand-300 transition-colors leading-tight">
