@@ -1,7 +1,6 @@
 import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import DisqusComments from '@/components/DisqusComments';
 
 interface PostPageProps {
   params: { slug: string };
@@ -94,17 +93,57 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
 
-      {/* Comments */}
-      <DisqusComments postSlug={params.slug} postTitle={post.title} />
+      {/* Post Footer */}
+      <div className="mt-14 pt-10 border-t border-stone-200">
+        {/* Substack comment link for synced posts */}
+        {post.substackUrl && (
+          <div className="text-center mb-10">
+            <a
+              href={`${post.substackUrl}#comments`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 border border-stone-300 text-stone-700 text-sm font-medium tracking-wider uppercase hover:bg-stone-100 transition-colors"
+              style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}
+            >
+              Leave a comment on Substack
+            </a>
+          </div>
+        )}
 
-      {/* Back Link */}
-      <div className="mt-12 pt-8 border-t border-stone-200">
-        <Link
-          href={`/category/${primaryCategory}`}
-          className="text-brand-700 hover:text-brand-900 font-medium transition-colors uppercase tracking-wider text-sm"
-        >
-          &larr; More in {getCategoryDisplayName(primaryCategory)}
-        </Link>
+        {/* Subscribe */}
+        <div className="text-center mb-10">
+          <p className="text-stone-500 text-sm mb-4" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
+            Enjoyed this? Get new posts in your inbox.
+          </p>
+          <iframe
+            src="https://henrykoon.substack.com/embed"
+            width="100%"
+            height="80"
+            style={{ background: 'transparent', border: 'none', maxWidth: '400px', margin: '0 auto', display: 'block' }}
+            frameBorder="0"
+            scrolling="no"
+          />
+        </div>
+
+        {/* Read on Substack + Back navigation */}
+        <div className="flex items-center justify-between text-sm" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
+          <Link
+            href={`/category/${primaryCategory}`}
+            className="text-stone-500 hover:text-stone-800 transition-colors uppercase tracking-wider"
+          >
+            &larr; More in {getCategoryDisplayName(primaryCategory)}
+          </Link>
+          {post.substackUrl && (
+            <a
+              href={post.substackUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-500 hover:text-stone-800 transition-colors uppercase tracking-wider"
+            >
+              Read on Substack &rarr;
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );

@@ -13,6 +13,7 @@ export interface PostData {
   category: string | string[];
   excerpt: string;
   coverImage?: string;
+  substackUrl?: string;
   draft?: boolean;
   contentHtml?: string;
 }
@@ -104,6 +105,7 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
     category: data.category || 'life',
     excerpt: data.excerpt || '',
     coverImage: data.coverImage || undefined,
+    substackUrl: data.substackUrl || undefined,
     contentHtml,
   };
 }
