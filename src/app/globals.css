@@ -36,25 +36,30 @@
 @layer components {
   .prose {
     @apply max-w-none;
+    font-family: Georgia, 'Cormorant Garamond', 'Times New Roman', serif;
   }
 
   .prose h1 {
-    @apply text-3xl font-bold mb-6 mt-8;
+    @apply text-3xl font-bold mb-6 mt-10;
     font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.01em;
   }
 
   .prose h2 {
-    @apply text-2xl font-semibold mb-4 mt-6;
+    @apply text-2xl font-semibold mb-4 mt-8;
     font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.01em;
   }
 
   .prose h3 {
-    @apply text-xl font-semibold mb-3 mt-5;
+    @apply text-xl font-semibold mb-3 mt-6;
     font-family: 'Cormorant Garamond', Georgia, serif;
   }
 
   .prose p {
-    @apply mb-4 leading-relaxed text-stone-700;
+    @apply mb-6 text-stone-700;
+    line-height: 1.8;
+    font-size: 1.125rem;
   }
 
   .prose-indent p {
@@ -62,34 +67,46 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-brand-500 pl-4 italic text-stone-600 my-4;
+    @apply border-l-2 border-stone-300 pl-6 my-6 text-stone-600;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  .prose blockquote p {
+    @apply text-stone-600;
   }
 
   .prose ul {
-    @apply list-disc pl-6 mb-4;
+    @apply list-disc pl-8 mb-6;
   }
 
   .prose ol {
-    @apply list-decimal pl-6 mb-4;
+    @apply list-decimal pl-8 mb-6;
   }
 
   .prose li {
-    @apply mb-1;
+    @apply mb-2;
+    line-height: 1.8;
   }
 
   .prose a {
-    @apply text-brand-700 underline hover:text-brand-900 transition-colors;
+    @apply text-stone-800 underline decoration-stone-400 hover:decoration-stone-800 transition-colors;
+    text-underline-offset: 3px;
   }
 
   .prose img {
-    @apply rounded-lg my-6 mx-auto;
+    @apply my-8 mx-auto;
+  }
+
+  .prose hr {
+    @apply my-10 border-stone-200;
   }
 
   .prose pre {
-    @apply bg-gray-100 rounded-lg p-4 overflow-x-auto my-4;
+    @apply bg-gray-50 rounded-lg p-4 overflow-x-auto my-6;
   }
 
   .prose code {
-    @apply bg-gray-100 rounded px-1 py-0.5 text-sm;
+    @apply bg-gray-50 rounded px-1 py-0.5 text-sm;
   }
 }
