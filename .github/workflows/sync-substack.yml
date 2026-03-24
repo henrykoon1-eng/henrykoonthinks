@@ -1,0 +1,30 @@
+name: Sync Substack Posts
+
+on:
+  schedule:
+    # Check every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync Substack RSS
+        run: node scripts/sync-substack.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit new posts
+        run: |
+          git config user.name "Substack Sync Bot"
+          git config user.email "actions@github.com"
+          git add content/posts/
+          git diff --cached --quiet || git commit -m "Sync posts from Substack"
+          git push
