@@ -54,8 +54,35 @@ export default async function PostPage({ params }: PostPageProps) {
   const cats = Array.isArray(post.category) ? post.category : [post.category];
   const primaryCategory = cats[0];
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt || '',
+    datePublished: post.date,
+    author: {
+      '@type': 'Person',
+      name: 'Henry Koon',
+      url: 'https://henrythinks.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Henry Koon Thinks',
+      url: 'https://henrythinks.com',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://henrythinks.com/posts/${params.slug}`,
+    },
+    ...(post.coverImage && { image: `https://henrythinks.com${post.coverImage}` }),
+  };
+
   return (
     <article className="max-w-3xl mx-auto px-4 sm:px-8 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-stone-500 mb-6 uppercase tracking-wider">
         <Link href="/" className="hover:text-brand-700 transition-colors">Home</Link>
@@ -108,6 +135,7 @@ export default async function PostPage({ params }: PostPageProps) {
             src={post.coverImage}
             alt={post.title}
             className="w-full"
+            loading="lazy"
           />
         </div>
       )}
