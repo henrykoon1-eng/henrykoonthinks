@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PostSubscribeForm from '@/components/PostSubscribeForm';
 import DisqusComments from '@/components/DisqusComments';
+import PostLinkCards from '@/components/PostLinkCards';
 
 interface PostPageProps {
   params: { slug: string };
@@ -116,6 +117,7 @@ export default async function PostPage({ params }: PostPageProps) {
         className={`prose text-stone-800 text-lg leading-relaxed${!cats.includes('poetry') ? ' prose-indent' : ''}`}
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
+      <PostLinkCards />
 
       {/* Post Footer */}
       <div className="mt-14 pt-10 border-t border-stone-200">
