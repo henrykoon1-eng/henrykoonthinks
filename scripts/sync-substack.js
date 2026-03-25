@@ -162,7 +162,7 @@ async function main() {
       `date: "${date}"`,
       catYaml,
       `excerpt: "${(description || '').replace(/"/g, '\\"').substring(0, 200)}"`,
-      `substackUrl: "${link}"`,
+      `substackUrl: "${link.replace('henrykoon.substack.com', 'blog.henrythinks.com')}"`,
       '---',
     ].join('\n');
 

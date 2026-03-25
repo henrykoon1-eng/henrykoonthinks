@@ -17,6 +17,7 @@ const navLinks = [
   { href: '/category/poetry', label: 'Poetry' },
   { href: '/category/reviews', label: 'Reviews' },
   { href: '/quotes', label: 'Quotes' },
+  { href: 'https://blog.henrythinks.com', label: 'Newsletter' },
 ];
 
 export default function RootLayout({
@@ -49,15 +50,27 @@ export default function RootLayout({
                 </h1>
               </Link>
               <nav className="flex flex-wrap items-center gap-1 sm:gap-2">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="px-3 py-1.5 text-sm font-medium text-stone-400 hover:text-stone-100 uppercase tracking-wider transition-all"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navLinks.map((link) =>
+                  link.href.startsWith('http') ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 text-sm font-medium text-stone-400 hover:text-stone-100 uppercase tracking-wider transition-all"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="px-3 py-1.5 text-sm font-medium text-stone-400 hover:text-stone-100 uppercase tracking-wider transition-all"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </nav>
             </div>
           </div>
@@ -93,10 +106,11 @@ export default function RootLayout({
                 </ul>
               </div>
               <div>
-                <h4 className="text-stone-200 mb-3 uppercase tracking-wider text-sm">About</h4>
-                <p className="text-sm leading-relaxed">
-                  Welcome to my corner of the internet. Here I share my thoughts, stories, and reflections.
-                </p>
+                <h4 className="text-stone-200 mb-3 uppercase tracking-wider text-sm">Connect</h4>
+                <ul className="space-y-2 text-sm">
+                  <li><a href="https://blog.henrythinks.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-200 transition-colors">Newsletter on Substack</a></li>
+                  <li><Link href="/about" className="hover:text-stone-200 transition-colors">About</Link></li>
+                </ul>
               </div>
             </div>
             <div className="border-t border-stone-800 mt-8 pt-6 text-center text-sm text-stone-600">

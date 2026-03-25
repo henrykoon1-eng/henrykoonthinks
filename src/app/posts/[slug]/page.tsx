@@ -116,7 +116,7 @@ export default async function PostPage({ params }: PostPageProps) {
             Enjoyed this? Get new posts in your inbox.
           </p>
           <iframe
-            src="https://henrykoon.substack.com/embed"
+            src="https://blog.henrythinks.com/embed"
             width="100%"
             height="80"
             style={{ background: 'transparent', border: 'none', maxWidth: '400px', margin: '0 auto', display: 'block' }}

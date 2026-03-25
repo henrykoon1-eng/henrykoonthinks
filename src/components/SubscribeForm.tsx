@@ -8,7 +8,7 @@ export default function SubscribeForm() {
           Subscribe to get new posts by email.
         </p>
         <iframe
-          src="https://henrykoon.substack.com/embed"
+          src="https://blog.henrythinks.com/embed"
           width="100%"
           height="80"
           style={{ background: 'transparent', border: 'none' }}
