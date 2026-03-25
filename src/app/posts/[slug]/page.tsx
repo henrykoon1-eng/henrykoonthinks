@@ -1,6 +1,7 @@
 import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import PostSubscribeForm from '@/components/PostSubscribeForm';
 
 interface PostPageProps {
   params: { slug: string };
@@ -111,18 +112,8 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
 
         {/* Subscribe */}
-        <div className="text-center mb-10">
-          <p className="text-stone-500 text-sm mb-4" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
-            Enjoyed this? Get new posts in your inbox.
-          </p>
-          <iframe
-            src="https://blog.henrythinks.com/embed"
-            width="100%"
-            height="80"
-            style={{ background: 'transparent', border: 'none', maxWidth: '400px', margin: '0 auto', display: 'block' }}
-            frameBorder="0"
-            scrolling="no"
-          />
+        <div className="mb-10">
+          <PostSubscribeForm />
         </div>
 
         {/* Read on Substack + Back navigation */}

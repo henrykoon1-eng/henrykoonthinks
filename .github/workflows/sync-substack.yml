@@ -6,6 +6,9 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -18,13 +21,11 @@ jobs:
 
       - name: Sync Substack RSS
         run: node scripts/sync-substack.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit new posts
         run: |
           git config user.name "Substack Sync Bot"
           git config user.email "actions@github.com"
-          git add content/posts/
+          git add content/posts/ .substack-synced.json
           git diff --cached --quiet || git commit -m "Sync posts from Substack"
           git push
