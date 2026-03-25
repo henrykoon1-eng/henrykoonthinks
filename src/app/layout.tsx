@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
 import Script from 'next/script';
-import SubscribeForm from '@/components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Henry Koon Thinks',
@@ -80,9 +79,6 @@ export default function RootLayout({
         <main className="flex-1 w-full">
           {children}
         </main>
-
-        {/* Subscribe */}
-        <SubscribeForm />
 
         {/* Footer */}
         <footer className="bg-stone-900 text-stone-500 mt-auto">
