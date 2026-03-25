@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const SUBSTACK_FEED_URL = 'https://henrykoon.substack.com/feed';
+const SUBSTACK_FEED_URL = 'https://blog.henrythinks.com/feed';
 const POSTS_DIR = path.join(__dirname, '..', 'content', 'posts');
 const SYNC_FILE = path.join(__dirname, '..', '.substack-synced.json');
 
@@ -18,10 +18,13 @@ function saveSynced(synced) {
   fs.writeFileSync(SYNC_FILE, JSON.stringify(synced, null, 2));
 }
 
-// Fetch RSS feed
-function fetchFeed(url) {
+// Fetch RSS feed (follows redirects)
+function fetchFeed(url, maxRedirects = 3) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
+      if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location && maxRedirects > 0) {
+        return resolve(fetchFeed(res.headers.location, maxRedirects - 1));
+      }
       let data = '';
       res.on('data', (chunk) => (data += chunk));
       res.on('end', () => resolve(data));
@@ -92,6 +95,9 @@ function htmlToMarkdown(html) {
   text = text.replace(/&#8212;/g, '—');
   text = text.replace(/&#8211;/g, '–');
   text = text.replace(/&nbsp;/g, ' ');
+  text = text.replace(/&#9;/g, '');
+  text = text.replace(/&#x9;/g, '');
+  text = text.replace(/&#160;/g, ' ');
 
   // Remove Substack boilerplate text
   text = text.replace(/Thanks for reading.*?Subscribe for free.*$/gim, '');
@@ -136,7 +142,10 @@ async function main() {
 
   for (const item of items) {
     const link = getTag(item, 'link') || getTag(item, 'guid');
-    if (synced.includes(link)) {
+    // Normalize URLs so both old substack and new custom domain match
+    const normalizedLink = link.replace('blog.henrythinks.com', 'henrykoon.substack.com');
+    const normalizedSynced = synced.map(u => u.replace('blog.henrythinks.com', 'henrykoon.substack.com'));
+    if (normalizedSynced.includes(normalizedLink)) {
       console.log(`  Skipping (already synced): ${link}`);
       continue;
     }
