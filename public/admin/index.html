@@ -104,6 +104,26 @@
 
       // Run periodically since Decap CMS renders dynamically
       setInterval(formatCards, 1000);
+
+      // Strip leading tabs/spaces from markdown body before saving
+      // This prevents paragraphs from rendering as code blocks
+      function registerCleanup() {
+        if (window.CMS && window.CMS.registerEventListener) {
+          window.CMS.registerEventListener({
+            name: 'preSave',
+            handler: ({ entry }) => {
+              const body = entry.get('data').get('body');
+              if (body) {
+                const cleaned = body.replace(/^[\t ]+/gm, '');
+                return entry.get('data').set('body', cleaned);
+              }
+            },
+          });
+        } else {
+          setTimeout(registerCleanup, 500);
+        }
+      }
+      registerCleanup();
     </script>
   </body>
 </html>
