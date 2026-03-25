@@ -1,9 +1,11 @@
 ---
-title: "What \"I'm not into Politics\" Really Says"
-date: "2026-03-25"
-category: "essays"
-excerpt: "Do you actually believe in Democracy?"
-substackUrl: "https://blog.henrythinks.com/p/what-im-not-into-politics-really"
+title: What "I'm not into Politics" Really Says
+category:
+  - essays
+date: 2026-03-25
+excerpt: Do you actually believe in Democracy?
+substackUrl: https://blog.henrythinks.com/p/what-im-not-into-politics-really
+coverImage: https://upload.wikimedia.org/wikipedia/commons/d/de/Ecce_homo_by_Antonio_Ciseri_%281%29.jpg
 ---
 
 I have all too many friends, family members and peers for whom American Politics is a sort of hobby which some men are simply "more inclined to". These people dismiss all political discussions as "not for them" and they call them "unproductive" "divisive" and "cringe."
@@ -14,7 +16,7 @@ All throughout history there have been people who held their position, in fact, 
 
 To withdraw from or minimize one's role in our democratic political process is to not only oppose democracy itself but also to oppose the theological and moral framework which our founders claim insists upon this democratic mechanism of government. Furthermore, to "not care about politics" is to neglect your inherent duty and responsibility as the moral agents democratic citizens necessarily are. 
 
- Granted, we are born into this responsibility and may not even want it. *To use a stirring image*; we turn 18 and find ourselves as Roman governors being handed a Galilean troublemaker with his life in our hands.
+Granted, we are born into this responsibility and may not even want it. *To use a stirring image*; we turn 18 and find ourselves as Roman governors being handed a Galilean troublemaker with his life in our hands.
 
 Of course, in these trying and disgusting political times we may wish we did not have to vote or fight or care about politics at all–but as an American citizen you have no choice. Or as I once heard:
 
@@ -22,7 +24,7 @@ Frodo:* I wish the Ring had never come to me. I wish none of this had happened. 
 
 More and more I understand there is a practical reason our founders left the burden and responsibility of the ballot to only an educated and leisured land owning class. It is actually hard and unending work to be politically educated, but it is our solemn and sacred duty to ensure our liberty by such laborious democratic means.
 
- Nobody is born with a knowledge of foreign affairs, monetary policy, and political theory and only few are born with the requisite desire to learn them (Lucky me I guess). So if you are not so knowledgeable a voter as you know you should be and you do not plan or want to become one you are left with three options:
+Nobody is born with a knowledge of foreign affairs, monetary policy, and political theory and only few are born with the requisite desire to learn them (Lucky me I guess). So if you are not so knowledgeable a voter as you know you should be and you do not plan or want to become one you are left with three options:
 
 1. Continue voting unthoughtfully and without taking enough time and study to have opinions outside of propaganda and watch as your country crumbles and succumbs to whoever or whatever can make the best propaganda
 
