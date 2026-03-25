@@ -7,6 +7,7 @@
     <title>Henry Koon Thinks — Admin</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
+      /* Category badges — small, rounded, pastel */
       .category-badge {
         display: inline-block;
         padding: 2px 10px;
@@ -30,6 +31,36 @@
         color: #9ca3af;
         margin-top: 2px;
       }
+
+      /* Editorial workflow status labels — bold, square, high contrast */
+      [class*="TopBarButton"] span,
+      [data-testid*="workflow"] span {
+        font-weight: 800 !important;
+      }
+      /* Override Decap's default status board column headers */
+      [class*="ColumnHeader"],
+      [class*="BoardColumn"] > div:first-child {
+        font-size: 14px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+      }
+      /* Status indicator badges injected by our script */
+      .status-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        vertical-align: middle;
+        border: 2px solid;
+      }
+      .status-badge.draft { background: #fef2f2; color: #dc2626; border-color: #dc2626; }
+      .status-badge.review { background: #fffbeb; color: #d97706; border-color: #d97706; }
+      .status-badge.ready { background: #f0fdf4; color: #16a34a; border-color: #16a34a; }
     </style>
   </head>
   <body>
@@ -102,9 +133,10 @@
             titleSpan.textContent = title;
             titleSpan.style.fontWeight = '600';
             titleSpan.style.color = '#111827';
+            titleSpan.style.fontSize = '15px';
             wrapper.appendChild(titleSpan);
 
-            // Category badge
+            // Category badge — rounded, pastel
             const badge = document.createElement('span');
             badge.className = 'category-badge ' + (categoryColors[category] || '');
             badge.textContent = category.replace('-', ' ');
@@ -118,6 +150,21 @@
 
             parent.replaceChild(wrapper, summaryNode);
             card.dataset.formatted = 'true';
+          }
+        });
+
+        // Style the editorial workflow status labels differently
+        // These are Decap's built-in status indicators on the workflow board
+        document.querySelectorAll('[class*="WorkflowCard"]').forEach(wfCard => {
+          if (wfCard.dataset.statusStyled) return;
+          const statusEl = wfCard.querySelector('[class*="CardStatus"], [class*="status"]');
+          if (statusEl && !statusEl.classList.contains('status-badge')) {
+            const text = statusEl.textContent.trim().toLowerCase();
+            statusEl.classList.add('status-badge');
+            if (text.includes('draft')) statusEl.classList.add('draft');
+            else if (text.includes('review')) statusEl.classList.add('review');
+            else if (text.includes('ready')) statusEl.classList.add('ready');
+            wfCard.dataset.statusStyled = 'true';
           }
         });
       }
