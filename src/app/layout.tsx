@@ -6,6 +6,15 @@ import Script from 'next/script';
 export const metadata: Metadata = {
   title: 'Henry Koon Thinks',
   description: 'A collection of thoughts, essays, and other writings across a wide range of my interests',
+  metadataBase: new URL('https://henrythinks.com'),
+  openGraph: {
+    siteName: 'Henry Koon Thinks',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary',
+  },
 };
 
 const navLinks = [

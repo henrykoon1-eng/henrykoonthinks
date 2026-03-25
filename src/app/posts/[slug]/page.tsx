@@ -15,9 +15,31 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PostPageProps) {
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: 'Post Not Found' };
+
+  const url = `https://henrythinks.com/posts/${params.slug}`;
+  const title = `${post.title} — Henry Koon Thinks`;
+  const description = post.excerpt || 'An essay by Henry Koon';
+
   return {
-    title: `${post.title} — Henry Koon Thinks`,
-    description: post.excerpt,
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: post.title,
+      description,
+      url,
+      siteName: 'Henry Koon Thinks',
+      type: 'article',
+      ...(post.coverImage && { images: [{ url: `https://henrythinks.com${post.coverImage}` }] }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      ...(post.coverImage && { images: [`https://henrythinks.com${post.coverImage}`] }),
+    },
   };
 }
 
