@@ -2,6 +2,7 @@ import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/po
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PostSubscribeForm from '@/components/PostSubscribeForm';
+import DisqusComments from '@/components/DisqusComments';
 
 interface PostPageProps {
   params: { slug: string };
@@ -93,6 +94,9 @@ export default async function PostPage({ params }: PostPageProps) {
         className={`prose text-stone-800 text-lg leading-relaxed${!cats.includes('poetry') ? ' prose-indent' : ''}`}
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
+
+      {/* Comments */}
+      <DisqusComments postSlug={params.slug} postTitle={post.title} />
 
       {/* Post Footer */}
       <div className="mt-14 pt-10 border-t border-stone-200">
