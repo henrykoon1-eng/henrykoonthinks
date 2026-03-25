@@ -95,9 +95,6 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: post.contentHtml || '' }}
       />
 
-      {/* Comments */}
-      <DisqusComments postSlug={params.slug} postTitle={post.title} />
-
       {/* Post Footer */}
       <div className="mt-14 pt-10 border-t border-stone-200">
         {/* Substack comment link for synced posts */}
@@ -140,6 +137,9 @@ export default async function PostPage({ params }: PostPageProps) {
           )}
         </div>
       </div>
+
+      {/* Comments */}
+      <DisqusComments postSlug={params.slug} postTitle={post.title} />
     </article>
   );
 }
