@@ -33,7 +33,27 @@
     </style>
   </head>
   <body>
+    <script>
+      // Must register preSave BEFORE Decap CMS loads
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Strip leading tabs/spaces from markdown body before saving
+      CMS.registerEventListener({
+        name: 'preSave',
+        handler: ({ entry }) => {
+          const body = entry.get('data').get('body');
+          if (body) {
+            const cleaned = body.replace(/^[\t ]+/gm, '');
+            return entry.get('data').set('body', cleaned);
+          }
+          return entry.get('data');
+        },
+      });
+      // Now initialize CMS
+      CMS.init();
+    </script>
     <script>
       // Decap CMS renders the summary as plain text inside list cards.
       // This script watches for those cards and reformats them.
@@ -105,25 +125,6 @@
       // Run periodically since Decap CMS renders dynamically
       setInterval(formatCards, 1000);
 
-      // Strip leading tabs/spaces from markdown body before saving
-      // This prevents paragraphs from rendering as code blocks
-      function registerCleanup() {
-        if (window.CMS && window.CMS.registerEventListener) {
-          window.CMS.registerEventListener({
-            name: 'preSave',
-            handler: ({ entry }) => {
-              const body = entry.get('data').get('body');
-              if (body) {
-                const cleaned = body.replace(/^[\t ]+/gm, '');
-                return entry.get('data').set('body', cleaned);
-              }
-            },
-          });
-        } else {
-          setTimeout(registerCleanup, 500);
-        }
-      }
-      registerCleanup();
     </script>
   </body>
 </html>
