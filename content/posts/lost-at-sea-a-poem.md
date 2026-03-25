@@ -8,7 +8,6 @@ excerpt: ""
 
 *Originally published on [2023-12-08](https://henrykoonthinks.blogspot.com/2023/12/lost-at-sea.html)*
 
-
 *The sun of gold is spent and I cannot see 
 Dark and cold, the waters rise about me 
 Under foot I've no hold, I'm sent out to sea 
@@ -22,4 +21,4 @@ In such a storm of fury no man could set sail* 
  I cannot steer, I never could 
 I cannot go by sail of cloth and ship of wood
  It is the principal of progress which I misunderstood
- To give up the wheel, its all one could*
+ To give up the wheel, its all one could.*
