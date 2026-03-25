@@ -95,11 +95,17 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  // Strip leading tabs/spaces from lines to prevent markdown code block rendering
-  const cleanContent = content.replace(/^[\t ]+/gm, '');
+  let contentHtml: string;
 
-  const processedContent = await remark().use(html).process(cleanContent);
-  const contentHtml = processedContent.toString();
+  if (data.format === 'html') {
+    // Substack-synced posts: content is already clean HTML, use directly
+    contentHtml = content.trim();
+  } else {
+    // Regular markdown posts: strip leading whitespace and process with remark
+    const cleanContent = content.replace(/^[\t ]+/gm, '');
+    const processedContent = await remark().use(html).process(cleanContent);
+    contentHtml = processedContent.toString();
+  }
 
   return {
     slug,

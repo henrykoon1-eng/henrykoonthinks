@@ -40,72 +40,24 @@ function getTag(xml, tag) {
   return match ? match[1].trim() : '';
 }
 
-// Convert HTML to clean markdown
-function htmlToMarkdown(html) {
-  // Remove Substack subscribe widgets
-  let text = html.replace(/<div class="subscription-widget[\s\S]*?<\/div><\/div><\/div>/gi, '');
-  // Also remove any preamble text from Substack subscribe embeds
-  text = text.replace(/<p class="cta-caption">[\s\S]*?<\/p>/gi, '');
+// Clean Substack HTML — strip subscribe widgets and boilerplate, keep everything else
+function cleanSubstackHtml(html) {
+  let text = html;
+
+  // Remove Substack subscribe widgets — catch the entire widget block including all nested content
+  text = text.replace(/<div[^>]*class="subscription-widget[\s\S]*?<\/form>\s*(<\/div>\s*)*(<\/div>)*/gi, '');
   text = text.replace(/<div[^>]*data-component-name="SubscribeWidgetToDOM"[\s\S]*?<\/div>/gi, '');
+  text = text.replace(/<p class="cta-caption">[\s\S]*?<\/p>/gi, '');
+  // Catch any remaining subscribe forms
+  text = text.replace(/<form[^>]*class="subscription-widget[\s\S]*?<\/form>/gi, '');
 
-  // Handle images
-  text = text.replace(/<img[^>]*src="([^"]*)"[^>]*alt="([^"]*)"[^>]*>/gi, '![$2]($1)');
-  text = text.replace(/<img[^>]*src="([^"]*)"[^>]*>/gi, '![]($1)');
-
-  // Handle headings
-  text = text.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, '\n\n# $1\n\n');
-  text = text.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, '\n\n## $1\n\n');
-  text = text.replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, '\n\n### $1\n\n');
-  text = text.replace(/<h4[^>]*>([\s\S]*?)<\/h4>/gi, '\n\n#### $1\n\n');
-
-  // Handle blockquotes
-  text = text.replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, (_, content) => {
-    const clean = content.replace(/<[^>]+>/g, '').trim();
-    return '\n\n> ' + clean.split('\n').join('\n> ') + '\n\n';
-  });
-
-  // Handle lists
-  text = text.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, '- $1\n');
-  text = text.replace(/<\/?[uo]l[^>]*>/gi, '\n');
-
-  // Handle links
-  text = text.replace(/<a[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)');
-
-  // Handle bold/italic
-  text = text.replace(/<(strong|b)[^>]*>([\s\S]*?)<\/\1>/gi, '**$2**');
-  text = text.replace(/<(em|i)[^>]*>([\s\S]*?)<\/\1>/gi, '*$2*');
-
-  // Handle paragraphs and breaks
-  text = text.replace(/<br\s*\/?>/gi, '\n');
-  text = text.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, '\n\n$1\n\n');
-
-  // Remove remaining HTML tags
-  text = text.replace(/<[^>]+>/g, '');
-
-  // Decode HTML entities
-  text = text.replace(/&amp;/g, '&');
-  text = text.replace(/&lt;/g, '<');
-  text = text.replace(/&gt;/g, '>');
-  text = text.replace(/&quot;/g, '"');
-  text = text.replace(/&#8217;/g, "'");
-  text = text.replace(/&#8216;/g, "'");
-  text = text.replace(/&#8220;/g, '"');
-  text = text.replace(/&#8221;/g, '"');
-  text = text.replace(/&#8230;/g, '...');
-  text = text.replace(/&#8212;/g, '—');
-  text = text.replace(/&#8211;/g, '–');
-  text = text.replace(/&nbsp;/g, ' ');
+  // Remove tab entities that Substack inserts
   text = text.replace(/&#9;/g, '');
   text = text.replace(/&#x9;/g, '');
-  text = text.replace(/&#160;/g, ' ');
 
-  // Remove Substack boilerplate text
-  text = text.replace(/Thanks for reading.*?Subscribe for free.*$/gim, '');
-  text = text.replace(/Subscribe for free to receive.*$/gim, '');
-
-  // Clean up whitespace
-  text = text.replace(/\n{3,}/g, '\n\n');
-  text = text.replace(/[\t ]+/g, ' ');
+  // Clean up orphaned closing div tags and empty paragraphs
+  text = text.replace(/<\/div>\s*<\/div>\s*(?=<p>)/gi, '');
+  text = text.replace(/<p>\s*<\/p>/gi, '');
 
   return text.trim();
 }
@@ -158,7 +110,7 @@ async function main() {
 
     const date = pubDate ? new Date(pubDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
     const slug = slugify(title);
-    const markdown = htmlToMarkdown(contentEncoded || description);
+    const cleanHtml = cleanSubstackHtml(contentEncoded || description);
 
     // Build frontmatter
     const catYaml = categories.length === 1
@@ -172,6 +124,7 @@ async function main() {
       catYaml,
       `excerpt: "${(description || '').replace(/"/g, '\\"').substring(0, 200)}"`,
       `substackUrl: "${link.replace('henrykoon.substack.com', 'blog.henrythinks.com')}"`,
+      `format: "html"`,
       '---',
     ].join('\n');
 
@@ -184,7 +137,7 @@ async function main() {
       continue;
     }
 
-    fs.writeFileSync(filePath, frontmatter + '\n\n' + markdown);
+    fs.writeFileSync(filePath, frontmatter + '\n\n' + cleanHtml);
     synced.push(link);
     newCount++;
     console.log(`  Created: ${slug}.md`);
