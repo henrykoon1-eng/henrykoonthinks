@@ -7,8 +7,18 @@
     <title>Henry Koon Thinks — Admin</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
-      /* Category badges — small, rounded, pastel */
+      /* Card wrapper — relative so badge can be pinned */
+      .card-wrapper {
+        display: block;
+        position: relative;
+        min-height: 48px;
+        padding-bottom: 22px;
+      }
+      /* Category badges — small, rounded, pastel, pinned bottom-right */
       .category-badge {
+        position: absolute;
+        bottom: 0;
+        right: 0;
         display: inline-block;
         padding: 2px 10px;
         border-radius: 12px;
@@ -16,8 +26,6 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-left: 8px;
-        vertical-align: middle;
       }
       .category-badge.life { background: #dbeafe; color: #1e40af; }
       .category-badge.faith { background: #fef3c7; color: #92400e; }
@@ -26,10 +34,11 @@
       .category-badge.poetry { background: #fce7f3; color: #9d174d; }
       .category-badge.reviews { background: #f5f3ff; color: #6b21a8; }
       .post-date-line {
-        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
         font-size: 12px;
         color: #9ca3af;
-        margin-top: 2px;
       }
 
       /* Editorial workflow status labels — bold, square, high contrast */
@@ -126,7 +135,8 @@
 
           if (summaryNode) {
             const parent = summaryNode.parentNode;
-            const wrapper = document.createElement('span');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'card-wrapper';
             
             // Title
             const titleSpan = document.createElement('span');
@@ -134,15 +144,17 @@
             titleSpan.style.fontWeight = '600';
             titleSpan.style.color = '#111827';
             titleSpan.style.fontSize = '15px';
+            titleSpan.style.display = 'block';
+            titleSpan.style.paddingRight = '90px';
             wrapper.appendChild(titleSpan);
 
-            // Category badge — rounded, pastel
+            // Category badge — pinned bottom-right
             const badge = document.createElement('span');
             badge.className = 'category-badge ' + (categoryColors[category] || '');
             badge.textContent = category.replace('-', ' ');
             wrapper.appendChild(badge);
 
-            // Date on new line
+            // Date — pinned bottom-left
             const dateLine = document.createElement('span');
             dateLine.className = 'post-date-line';
             dateLine.textContent = date;
