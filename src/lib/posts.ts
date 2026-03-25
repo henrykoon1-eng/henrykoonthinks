@@ -95,7 +95,10 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = await remark().use(html).process(content);
+  // Strip leading tabs/spaces from lines to prevent markdown code block rendering
+  const cleanContent = content.replace(/^[\t ]+/gm, '');
+
+  const processedContent = await remark().use(html).process(cleanContent);
   const contentHtml = processedContent.toString();
 
   return {
