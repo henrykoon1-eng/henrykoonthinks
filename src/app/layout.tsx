@@ -5,15 +5,22 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Henry Koon Thinks',
-  description: 'A collection of thoughts, essays, and other writings across a wide range of my interests',
+  description: 'Essays on life, faith, the outdoors, poetry, and the things worth thinking about.',
   metadataBase: new URL('https://henrythinks.com'),
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     siteName: 'Henry Koon Thinks',
+    description: 'Essays on life, faith, the outdoors, poetry, and the things worth thinking about.',
     type: 'website',
     locale: 'en_US',
+    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'Henry Koon Thinks' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
+    images: ['/og-image.svg'],
   },
 };
 
