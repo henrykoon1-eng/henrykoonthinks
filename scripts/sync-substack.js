@@ -40,16 +40,43 @@ function getTag(xml, tag) {
   return match ? match[1].trim() : '';
 }
 
+// Extract cover image URL from <enclosure> tag within an item
+function getEnclosureUrl(itemXml) {
+  const match = itemXml.match(/<enclosure\s+url="([^"]+)"/i);
+  return match ? match[1] : null;
+}
+
+// Get the channel-level newsletter avatar URL so we can skip it as a cover image
+function getChannelImageUrl(fullXml) {
+  const channelSection = fullXml.substring(0, fullXml.indexOf('<item>'));
+  const match = channelSection.match(/<image>[\s\S]*?<url>([^<]+)<\/url>/i);
+  return match ? match[1].trim() : null;
+}
+
 // Clean Substack HTML — strip subscribe widgets and boilerplate, keep everything else
 function cleanSubstackHtml(html) {
   let text = html;
 
-  // Remove Substack subscribe widgets — catch the entire widget block including all nested content
+  // Remove Substack subscribe widgets
   text = text.replace(/<div[^>]*class="subscription-widget[\s\S]*?<\/form>\s*(<\/div>\s*)*(<\/div>)*/gi, '');
   text = text.replace(/<div[^>]*data-component-name="SubscribeWidgetToDOM"[\s\S]*?<\/div>/gi, '');
   text = text.replace(/<p class="cta-caption">[\s\S]*?<\/p>/gi, '');
-  // Catch any remaining subscribe forms
   text = text.replace(/<form[^>]*class="subscription-widget[\s\S]*?<\/form>/gi, '');
+
+  // Remove Substack call-to-action button paragraphs (Subscribe, Share, Leave a comment)
+  text = text.replace(/<p[^>]*class="button-wrapper"[^>]*>[\s\S]*?<\/p>/gi, '');
+
+  // Convert image gallery embeds to plain <img> tags
+  text = text.replace(/<div[^>]*class="image-gallery-embed"[^>]*data-attrs="([^"]*)"[^>]*>[\s\S]*?<\/div>/gi, (match, attrs) => {
+    try {
+      const decoded = attrs.replace(/&quot;/g, '"');
+      const parsed = JSON.parse(decoded);
+      const src = parsed?.gallery?.images?.[0]?.src;
+      return src ? `<img src="${src}" alt="" />` : '';
+    } catch {
+      return '';
+    }
+  });
 
   // Remove tab entities that Substack inserts
   text = text.replace(/&#9;/g, '');
@@ -71,7 +98,11 @@ function slugify(text) {
 }
 
 // Parse category from title convention: [Category] Title
-// e.g. "[Faith] My Post Title" → { category: 'faith', title: 'My Post Title' }
+// Examples:
+//   "[Faith] My Essay"           → category: faith
+//   "[Faith, Essays] My Essay"   → categories: [faith, essays]
+//   "My Essay" (no tag)          → category: essays (default)
+// Valid categories: life, faith, essays, the-outdoors, poetry, reviews
 function parseTitleCategory(title) {
   const match = title.match(/^\[([^\]]+)\]\s*(.*)/);
   if (match) {
@@ -85,7 +116,8 @@ async function main() {
   console.log('Fetching Substack RSS feed...');
   const xml = await fetchFeed(SUBSTACK_FEED_URL);
 
-  // Split into items
+  const channelImageUrl = getChannelImageUrl(xml);
+
   const items = xml.split('<item>').slice(1);
   console.log(`Found ${items.length} posts in feed`);
 
@@ -112,7 +144,10 @@ async function main() {
     const slug = slugify(title);
     const cleanHtml = cleanSubstackHtml(contentEncoded || description);
 
-    // Build frontmatter
+    // Cover image: use enclosure only if it's not the newsletter avatar
+    const enclosureUrl = getEnclosureUrl(item);
+    const coverImage = (enclosureUrl && enclosureUrl !== channelImageUrl) ? enclosureUrl : null;
+
     const catYaml = categories.length === 1
       ? `category: "${categories[0]}"`
       : `category:\n${categories.map(c => `  - "${c}"`).join('\n')}`;
@@ -124,9 +159,10 @@ async function main() {
       catYaml,
       `excerpt: "${(description || '').replace(/"/g, '\\"').substring(0, 200)}"`,
       `substackUrl: "${link.replace('henrykoon.substack.com', 'blog.henrythinks.com')}"`,
+      coverImage ? `coverImage: "${coverImage}"` : null,
       `format: "html"`,
       '---',
-    ].join('\n');
+    ].filter(Boolean).join('\n');
 
     const filePath = path.join(POSTS_DIR, `${slug}.md`);
 
@@ -140,7 +176,7 @@ async function main() {
     fs.writeFileSync(filePath, frontmatter + '\n\n' + cleanHtml);
     synced.push(link);
     newCount++;
-    console.log(`  Created: ${slug}.md`);
+    console.log(`  Created: ${slug}.md${coverImage ? ' (with cover image)' : ''}`);
   }
 
   saveSynced(synced);
