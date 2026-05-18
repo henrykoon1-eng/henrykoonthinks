@@ -32,14 +32,8 @@ export default function SubscribeForm() {
   return (
     <section className="border-t border-stone-200 py-14">
       <div className="max-w-lg mx-auto px-4 text-center">
-        <h3
-          className="text-2xl font-semibold text-stone-900 mb-2"
-          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-        >
-          Stay with the journey
-        </h3>
-        <p className="text-stone-500 text-sm mb-6" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
-          New essays and reflections, delivered to your inbox. No spam.
+        <p className="text-stone-600 text-base mb-6" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
+          Get email updates for new blog posts by following me on Substack.
         </p>
 
         {status === 'success' ? (

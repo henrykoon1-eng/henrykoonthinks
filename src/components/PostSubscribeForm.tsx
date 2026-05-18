@@ -42,7 +42,7 @@ export default function PostSubscribeForm() {
   return (
     <div className="text-center">
       <p className="text-stone-500 text-sm mb-3" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
-        Enjoyed this? Get new posts in your inbox.
+        Get email updates for new blog posts by following me on Substack.
       </p>
       <form onSubmit={handleSubmit} className="flex gap-0 max-w-xs mx-auto">
         <input
