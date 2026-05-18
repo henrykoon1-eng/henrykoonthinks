@@ -8,15 +8,15 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8">
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+      <div className="flex items-center gap-2 text-sm text-stone-500 mb-6">
         <Link href="/" className="hover:text-brand-600 transition-colors">Home</Link>
         <span>/</span>
-        <span className="text-gray-800 font-medium">About</span>
+        <span className="text-stone-800 font-medium">About</span>
       </div>
 
-      <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">About</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-6">About</h1>
 
-      <div className="prose text-gray-700 text-lg leading-relaxed space-y-4">
+      <div className="prose text-stone-700 text-lg leading-relaxed space-y-4">
         <p>
           Welcome to <strong>Henry Koon Thinks</strong> — a personal blog where I share my
           reflections on life, faith, the great outdoors, and the craft of writing.

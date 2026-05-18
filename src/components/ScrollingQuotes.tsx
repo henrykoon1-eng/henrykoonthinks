@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface Quote {
   text: string;
@@ -22,7 +22,8 @@ function shuffle<T>(arr: T[]): T[] {
 const SCROLL_SPEED = 30;
 
 export default function ScrollingQuotes({ quotes }: { quotes: Quote[] }) {
-  const shuffled = useMemo(() => shuffle(quotes), [quotes]);
+  const [shuffled, setShuffled] = useState<Quote[]>(quotes);
+  useEffect(() => { setShuffled(shuffle([...quotes])); }, [quotes]);
   const doubled = [...shuffled, ...shuffled];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(120);

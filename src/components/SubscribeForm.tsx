@@ -10,7 +10,7 @@ export default function SubscribeForm() {
     e.preventDefault();
     setStatus('loading');
     try {
-      const res = await fetch('https://henrykoon.substack.com/api/v1/free?nojs=true', {
+      await fetch('https://henrykoon.substack.com/api/v1/free?nojs=true', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({

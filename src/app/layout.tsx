@@ -11,6 +11,11 @@ export const metadata: Metadata = {
     icon: '/favicon.svg',
     apple: '/favicon.svg',
   },
+  alternates: {
+    types: {
+      'application/rss+xml': 'https://henrythinks.com/rss.xml',
+    },
+  },
   openGraph: {
     siteName: 'Henry Koon Thinks',
     description: 'Essays on life, faith, the outdoors, poetry, and the things worth thinking about.',
