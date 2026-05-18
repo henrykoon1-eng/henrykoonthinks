@@ -2,8 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-publish_mode: editorial_workflow
-
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
@@ -34,6 +32,8 @@ collections:
       - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
       - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Substack URL", name: "substackUrl", widget: "string", required: false, hint: "Link to the original Substack post (auto-filled for synced posts)" }
+      - { label: "Format", name: "format", widget: "hidden", required: false }
 
   - name: "quotes"
     label: "Quotes"

@@ -188,7 +188,7 @@
 
       <label>Category * <span style="font-weight:400; text-transform:none; letter-spacing:0;">(select one or more)</span></label>
       <div id="categoryGroup" style="display:flex; flex-wrap:wrap; gap:8px 16px; margin-bottom:20px;">
-        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="life" checked> Life</label>
+        <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="life"> Life</label>
         <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="faith"> Faith</label>
         <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="essays"> Essays</label>
         <label style="display:flex; align-items:center; gap:6px; font-size:14px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer;"><input type="checkbox" name="category" value="the-outdoors"> The Outdoors</label>
@@ -212,6 +212,11 @@
         <div class="label">Drag & drop your .docx file here, or click to browse</div>
         <div class="filename" id="fileName"></div>
       </div>
+
+      <label style="display:flex; align-items:center; gap:8px; text-transform:none; letter-spacing:0; color:#f5f5f4; cursor:pointer; font-size:14px; margin-bottom:20px;">
+        <input type="checkbox" id="draftToggle" name="draft" style="width:auto; margin:0;">
+        Save as draft (won't appear on site until unchecked)
+      </label>
 
       <button type="submit" id="submitBtn">Publish Post</button>
     </form>
@@ -340,15 +345,19 @@
 
         // Build frontmatter
         const slug = slugify(title);
+        const isDraft = document.getElementById('draftToggle').checked;
+        const catYaml = checked.length === 1
+          ? 'category: "' + checked[0] + '"'
+          : 'category:\n' + checked.map(c => '  - "' + c + '"').join('\n');
         const lines = [
           '---',
           'title: "' + title.replace(/"/g, '\\"') + '"',
           'date: "' + date + '"',
-          'category:',
-          ...checked.map(c => '  - "' + c + '"'),
+          catYaml,
           'excerpt: "' + excerpt.replace(/"/g, '\\"') + '"',
         ];
         if (coverImage) lines.push('coverImage: "' + coverImage + '"');
+        if (isDraft) lines.push('draft: true');
         lines.push('---');
 
         const fileContent = lines.join('\n') + '\n\n' + markdown;
@@ -392,7 +401,7 @@
         }
 
         statusEl.className = 'status success';
-        statusEl.textContent = 'Post "' + title + '" published! Netlify will redeploy in ~1 minute.';
+        statusEl.textContent = 'Post "' + title + '" published! Netlify will redeploy in ~2-3 minutes.';
         document.getElementById('postForm').reset();
         document.getElementById('date').valueAsDate = new Date();
         fileNameEl.textContent = '';
