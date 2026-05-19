@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   },
 };
 
-const navLinks = [
+const navLinks: { href: string; label: string; italic?: boolean }[] = [
   { href: '/category/the-outdoors', label: 'The Outdoors' },
   { href: '/category/life', label: 'Life' },
   { href: '/category/faith', label: 'Faith' },
   { href: '/category/essays', label: 'Essays' },
   { href: '/category/poetry', label: 'Poetry' },
   { href: '/category/reviews', label: 'Reviews' },
-  { href: '/quotes', label: 'Quotes' },
+  { href: '/quotes', label: 'Quotes', italic: true },
 ];
 
 export default function RootLayout({
@@ -84,7 +84,7 @@ export default function RootLayout({
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="px-3 py-1.5 text-sm font-medium text-stone-400 hover:text-stone-100 uppercase tracking-wider transition-all"
+                      className={`px-3 py-1.5 text-sm font-medium text-stone-400 hover:text-stone-100 uppercase tracking-wider transition-all${link.italic ? ' italic' : ''}`}
                     >
                       {link.label}
                     </Link>
