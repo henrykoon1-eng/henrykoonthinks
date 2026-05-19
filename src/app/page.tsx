@@ -58,16 +58,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Latest Articles with Category Tabs */}
-      <section className="px-4 sm:px-8 lg:px-16 py-16">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="h-px flex-1 bg-stone-300" />
-          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 uppercase tracking-wider text-center">
-            Latest
-          </h2>
-          <div className="h-px flex-1 bg-stone-300" />
-        </div>
+      {/* Divider */}
+      <div className="flex items-center gap-6 px-4 sm:px-8 lg:px-16 py-10 bg-stone-50">
+        <div className="h-px flex-1 bg-stone-300" />
+        <span className="text-stone-400 text-sm tracking-widest uppercase" style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontStyle: 'italic', letterSpacing: '0.2em' }}>
+          &mdash;&nbsp;Latest Writing&nbsp;&mdash;
+        </span>
+        <div className="h-px flex-1 bg-stone-300" />
+      </div>
 
+      {/* Latest Articles with Category Tabs */}
+      <section className="px-4 sm:px-8 lg:px-16 pb-16 bg-stone-50">
         <FilteredPosts posts={postsData} categories={categories} categoryMap={categoryMap} />
       </section>
     </div>

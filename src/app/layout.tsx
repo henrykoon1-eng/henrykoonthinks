@@ -30,14 +30,13 @@ export const metadata: Metadata = {
 };
 
 const navLinks = [
+  { href: '/category/the-outdoors', label: 'The Outdoors' },
   { href: '/category/life', label: 'Life' },
   { href: '/category/faith', label: 'Faith' },
   { href: '/category/essays', label: 'Essays' },
-  { href: '/category/the-outdoors', label: 'The Outdoors' },
   { href: '/category/poetry', label: 'Poetry' },
   { href: '/category/reviews', label: 'Reviews' },
   { href: '/quotes', label: 'Quotes' },
-  { href: 'https://blog.henrythinks.com', label: 'Newsletter' },
 ];
 
 export default function RootLayout({
@@ -124,8 +123,25 @@ export default function RootLayout({
               </div>
               <div>
                 <h4 className="text-stone-200 mb-3 uppercase tracking-wider text-sm">Connect</h4>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="https://blog.henrythinks.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-200 transition-colors">Newsletter on Substack</a></li>
+                <ul className="space-y-3 text-sm">
+                  <li>
+                    <a
+                      href="https://blog.henrythinks.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-stone-400 hover:text-[#FF6719] transition-colors group"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="w-5 h-5 fill-stone-400 group-hover:fill-[#FF6719] transition-colors flex-shrink-0"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                      </svg>
+                      Read on Substack
+                    </a>
+                  </li>
                   <li><Link href="/about" className="hover:text-stone-200 transition-colors">About</Link></li>
                 </ul>
               </div>
