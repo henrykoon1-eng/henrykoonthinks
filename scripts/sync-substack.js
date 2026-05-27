@@ -130,13 +130,41 @@ function extractCategoryTag(text) {
   return null;
 }
 
-// Determine categories from a post. The [Tag] can live at the start of the
-// subtitle (Substack RSS <description>) OR the title. Subtitle wins. The tag
-// is stripped from wherever it appears so it never shows up in the post.
-// Examples:
-//   subtitle "[PCT] Pre-trail notes"   → category: the-outdoors
-//   title "[Faith, Essays] My Essay"   → categories: [faith, essays]
-//   no tag anywhere                    → category: essays (default)
+// Keyword rules for auto-categorizing posts that have NO explicit [Tag].
+// This lets you title posts naturally on Substack (no brackets) and still have
+// them land in the right section. Rules are checked top to bottom — the FIRST
+// rule with a matching keyword wins, so put the most specific/intentional
+// signals first. Matching is case-insensitive and on whole words.
+// Add or reorder keywords freely.
+const KEYWORD_RULES = [
+  { category: 'the-outdoors', keywords: ['pct'] },
+  { category: 'poetry',       keywords: ['poem', 'poetry'] },
+  { category: 'reviews',      keywords: ['review'] },
+  { category: 'faith',        keywords: ['prayer', 'worship', 'gospel', 'christian', 'faith', 'church', 'holy', 'bible', 'sermon', 'sacred', 'jesus'] },
+  { category: 'the-outdoors', keywords: ['hike', 'hiking', 'trail', 'mountain', 'wilderness', 'backpack', 'summit', 'camp', 'woods', 'forest'] },
+];
+
+function matchesKeyword(haystack, kw) {
+  const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`\\b${escaped}\\b`, 'i').test(haystack);
+}
+
+function inferCategoryFromKeywords(text) {
+  const haystack = text || '';
+  for (const rule of KEYWORD_RULES) {
+    if (rule.keywords.some((kw) => matchesKeyword(haystack, kw))) {
+      return rule.category;
+    }
+  }
+  return null;
+}
+
+// Determine categories from a post, in priority order:
+//   1. Explicit [Tag] at the start of the subtitle (Substack RSS <description>)
+//   2. Explicit [Tag] at the start of the title
+//   3. Keyword inference from the title + subtitle (e.g. "PCT" → the-outdoors)
+//   4. Default → essays
+// Any explicit [Tag] is stripped so it never shows up in the post.
 function parseCategory({ title, description }) {
   const fromSubtitle = extractCategoryTag(description);
   const fromTitle = extractCategoryTag(title);
@@ -144,10 +172,16 @@ function parseCategory({ title, description }) {
   const cleanTitle = fromTitle ? fromTitle.rest : title;
   const cleanDescription = fromSubtitle ? fromSubtitle.rest : description;
 
-  const categories =
+  let categories =
     (fromSubtitle && fromSubtitle.categories) ||
-    (fromTitle && fromTitle.categories) ||
-    ['essays'];
+    (fromTitle && fromTitle.categories);
+
+  if (!categories) {
+    const inferred = inferCategoryFromKeywords(`${cleanTitle} ${cleanDescription}`);
+    if (inferred) categories = [inferred];
+  }
+
+  if (!categories) categories = ['essays'];
 
   return { categories, title: cleanTitle, description: cleanDescription };
 }
