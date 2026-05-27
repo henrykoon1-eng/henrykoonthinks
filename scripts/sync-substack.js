@@ -97,19 +97,59 @@ function slugify(text) {
     .substring(0, 80);
 }
 
-// Parse category from title convention: [Category] Title
-// Examples:
-//   "[Faith] My Essay"           → category: faith
-//   "[Faith, Essays] My Essay"   → categories: [faith, essays]
-//   "My Essay" (no tag)          → category: essays (default)
-// Valid categories: life, faith, essays, the-outdoors, poetry, reviews
-function parseTitleCategory(title) {
-  const match = title.match(/^\[([^\]]+)\]\s*(.*)/);
-  if (match) {
-    const rawCats = match[1].split(',').map(c => c.trim().toLowerCase().replace(/ /g, '-'));
-    return { categories: rawCats, title: match[2] };
+// The site's real categories
+const VALID_CATEGORIES = ['life', 'faith', 'essays', 'the-outdoors', 'poetry', 'reviews'];
+
+// Shorthand tags that map to a real category. Add your own here.
+// e.g. "pct" lets you write [PCT] and have it land in The Outdoors.
+const CATEGORY_ALIASES = {
+  pct: 'the-outdoors',
+  outdoors: 'the-outdoors',
+  hiking: 'the-outdoors',
+  review: 'reviews',
+  essay: 'essays',
+  poem: 'poetry',
+};
+
+function resolveCategory(raw) {
+  const key = raw.trim().toLowerCase().replace(/ /g, '-');
+  return CATEGORY_ALIASES[key] || key;
+}
+
+// Look for a [Tag] at the start of a string. Only treats it as a category tag
+// if every part resolves to a real category (so a subtitle that just happens to
+// start with brackets is left alone). Returns { categories, rest } or null.
+function extractCategoryTag(text) {
+  const match = (text || '').match(/^\s*\[([^\]]+)\]\s*([\s\S]*)/);
+  if (!match) return null;
+  const parts = match[1].split(',').map(s => s.trim()).filter(Boolean);
+  const resolved = parts.map(resolveCategory);
+  if (resolved.length && resolved.every(c => VALID_CATEGORIES.includes(c))) {
+    return { categories: resolved, rest: match[2].trim() };
   }
-  return { categories: ['essays'], title };
+  return null;
+}
+
+// Determine categories from a post. The [Tag] can live at the start of the
+// subtitle (Substack RSS <description>) OR the title. Subtitle wins. The tag
+// is stripped from wherever it appears so it never shows up in the post.
+// Examples:
+//   subtitle "[PCT] Pre-trail notes"   → category: the-outdoors
+//   title "[Faith, Essays] My Essay"   → categories: [faith, essays]
+//   no tag anywhere                    → category: essays (default)
+function parseCategory({ title, description }) {
+  const fromSubtitle = extractCategoryTag(description);
+  const fromTitle = extractCategoryTag(title);
+
+  const cleanTitle = fromTitle ? fromTitle.rest : title;
+  const cleanDescription = fromSubtitle ? fromSubtitle.rest : description;
+
+  const categories =
+    (fromSubtitle && fromSubtitle.categories) ||
+    (fromTitle && fromTitle.categories) ||
+    ['essays'];
+
+  return { categories, title: cleanTitle, description: cleanDescription };
 }
 
 async function main() {
@@ -135,8 +175,8 @@ async function main() {
     }
 
     const rawTitle = getTag(item, 'title');
-    const { categories, title } = parseTitleCategory(rawTitle);
-    const description = getTag(item, 'description');
+    const rawDescription = getTag(item, 'description');
+    const { categories, title, description } = parseCategory({ title: rawTitle, description: rawDescription });
     const pubDate = getTag(item, 'pubDate');
     const contentEncoded = getTag(item, 'content:encoded');
 
