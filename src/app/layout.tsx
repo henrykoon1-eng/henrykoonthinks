@@ -6,14 +6,21 @@ import Script from 'next/script';
 export const metadata: Metadata = {
   title: 'Henry Koon Thinks',
   description: 'Essays on life, faith, the outdoors, poetry, and the things worth thinking about.',
-  metadataBase: new URL('https://henrythinks.com'),
+  metadataBase: new URL('https://henrykoonthinks.com'),
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    // Raster icons so the logo shows in Google results and browser tabs
+    // (Google does not use SVG favicons for the search-result icon).
+    icon: [
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
   alternates: {
+    canonical: '/',
     types: {
-      'application/rss+xml': 'https://henrythinks.com/rss.xml',
+      'application/rss+xml': 'https://henrykoonthinks.com/rss.xml',
     },
   },
   openGraph: {
@@ -21,12 +28,24 @@ export const metadata: Metadata = {
     description: 'Essays on life, faith, the outdoors, poetry, and the things worth thinking about.',
     type: 'website',
     locale: 'en_US',
-    images: [{ url: '/og-image.svg', width: 1200, height: 630, alt: 'Henry Koon Thinks' }],
+    url: 'https://henrykoonthinks.com',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Henry Koon Thinks' }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/og-image.svg'],
+    images: ['/og-image.png'],
   },
+};
+
+// Organization structured data — gives Google the site name + logo it uses
+// for the entity/knowledge panel and the icon beside search results.
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Henry Koon Thinks',
+  url: 'https://henrykoonthinks.com',
+  logo: 'https://henrykoonthinks.com/icon.png',
+  sameAs: ['https://blog.henrythinks.com'],
 };
 
 const navLinks: { href: string; label: string; italic?: boolean }[] = [
@@ -47,6 +66,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="afterInteractive" />
         <Script id="netlify-identity-redirect" strategy="afterInteractive">{`
           if (window.netlifyIdentity) {

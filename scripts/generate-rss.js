@@ -3,7 +3,7 @@ const path = require('path');
 const matter = require('gray-matter');
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
-const siteUrl = 'https://henrythinks.com';
+const siteUrl = 'https://henrykoonthinks.com';
 const publicDir = path.join(process.cwd(), 'public');
 
 function getAllPosts() {
@@ -20,17 +20,25 @@ function getAllPosts() {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data } = matter(fileContents);
 
+      const rawDate = data.date;
+      const date = rawDate instanceof Date
+        ? rawDate.toISOString().split('T')[0]
+        : (rawDate ? String(rawDate).split('T')[0] : '');
+
       return {
         slug,
         title: data.title || slug,
-        date: data.date || '',
+        date,
         excerpt: data.excerpt || '',
         coverImage: data.coverImage || null,
         draft: data.draft || false,
       };
     })
     .filter((post) => !post.draft)
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
+    .sort((a, b) => {
+      const ta = Date.parse(a.date); const tb = Date.parse(b.date);
+      return (Number.isNaN(tb) ? -Infinity : tb) - (Number.isNaN(ta) ? -Infinity : ta);
+    });
 }
 
 function escapeXml(str) {

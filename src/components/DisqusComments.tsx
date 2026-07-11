@@ -13,7 +13,7 @@ export default function DisqusComments({ postSlug, postTitle }: DisqusCommentsPr
     // @ts-ignore
     window.disqus_config = function () {
       // @ts-ignore
-      this.page.url = `https://henrythinks.com/posts/${postSlug}`;
+      this.page.url = `https://henrykoonthinks.com/posts/${postSlug}`;
       // @ts-ignore
       this.page.identifier = postSlug;
       // @ts-ignore

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PostPageProps) {
   const post = await getPostBySlug(params.slug);
   if (!post) return { title: 'Post Not Found' };
 
-  const url = `https://henrythinks.com/posts/${params.slug}`;
+  const url = `https://henrykoonthinks.com/posts/${params.slug}`;
   const title = `${post.title} — Henry Koon Thinks`;
   const description = post.excerpt || 'An essay by Henry Koon';
 
@@ -33,13 +33,13 @@ export async function generateMetadata({ params }: PostPageProps) {
       url,
       siteName: 'Henry Koon Thinks',
       type: 'article',
-      ...(post.coverImage && { images: [{ url: `https://henrythinks.com${post.coverImage}` }] }),
+      ...(post.coverImage && { images: [{ url: `https://henrykoonthinks.com${post.coverImage}` }] }),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description,
-      ...(post.coverImage && { images: [`https://henrythinks.com${post.coverImage}`] }),
+      ...(post.coverImage && { images: [`https://henrykoonthinks.com${post.coverImage}`] }),
     },
   };
 }
@@ -63,18 +63,18 @@ export default async function PostPage({ params }: PostPageProps) {
     author: {
       '@type': 'Person',
       name: 'Henry Koon',
-      url: 'https://henrythinks.com',
+      url: 'https://henrykoonthinks.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Henry Koon Thinks',
-      url: 'https://henrythinks.com',
+      url: 'https://henrykoonthinks.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://henrythinks.com/posts/${params.slug}`,
+      '@id': `https://henrykoonthinks.com/posts/${params.slug}`,
     },
-    ...(post.coverImage && { image: `https://henrythinks.com${post.coverImage}` }),
+    ...(post.coverImage && { image: `https://henrykoonthinks.com${post.coverImage}` }),
   };
 
   return (

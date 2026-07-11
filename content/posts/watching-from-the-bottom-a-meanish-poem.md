@@ -1,7 +1,7 @@
 ---
 title: "Watching from the Bottom: A (meanish) Poem"
 category: poetry
-date: 1902-05-20T17:20:00.000-05:00
+date: "2024-05-20"
 coverImage: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoWnftg7Jt4uO1wvixSwCI0tRWNoC_Yi7vJCYlk2lbjdPzNbvOY_d1OBWRi5mMl2IvIGaRFzRjzUlQe0LrScjysjyeo75qLjolxeIXtlAcoe8jdBx_IJBMn6MbShW6BJq1Ro3mibzaxLOOIkykLM3355IN6Bc5PZSW_GribtK21LVjay989vrE3WtJ8_JJ/w480-h640/badass%20feet.JPG
 ---
 ### Watching from the Bottom: A (meanish) Poem

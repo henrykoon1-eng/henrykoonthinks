@@ -198,15 +198,23 @@ async function main() {
   const synced = loadSynced();
   let newCount = 0;
 
+  // Set of Substack URLs already represented by a file on disk (matched via the
+  // substackUrl in each post's frontmatter). This is the real source of truth:
+  // it lets a post whose title/slug changed on Substack be recognized instead of
+  // recreated as a duplicate under the new slug, and it heals cases where the
+  // synced list lost track of a file.
+  const existingUrls = new Set();
+  for (const f of fs.readdirSync(POSTS_DIR)) {
+    if (!f.endsWith('.md')) continue;
+    const m = fs.readFileSync(path.join(POSTS_DIR, f), 'utf8')
+      .match(/^substackUrl:\s*"?([^"\n]+)"?/m);
+    if (m) existingUrls.add(m[1].trim().replace('blog.henrythinks.com', 'henrykoon.substack.com'));
+  }
+
   for (const item of items) {
     const link = getTag(item, 'link') || getTag(item, 'guid');
     // Normalize URLs so both old substack and new custom domain match
     const normalizedLink = link.replace('blog.henrythinks.com', 'henrykoon.substack.com');
-    const normalizedSynced = synced.map(u => u.replace('blog.henrythinks.com', 'henrykoon.substack.com'));
-    if (normalizedSynced.includes(normalizedLink)) {
-      console.log(`  Skipping (already synced): ${link}`);
-      continue;
-    }
 
     const rawTitle = getTag(item, 'title');
     const rawDescription = getTag(item, 'description');
@@ -240,15 +248,26 @@ async function main() {
 
     const filePath = path.join(POSTS_DIR, `${slug}.md`);
 
-    // Don't overwrite existing posts
+    // Skip if a file for this exact slug already exists (don't overwrite edits).
     if (fs.existsSync(filePath)) {
+      if (!synced.includes(link)) synced.push(link);
       console.log(`  Skipping (file exists): ${slug}.md`);
-      synced.push(link);
       continue;
     }
 
+    // Skip if another file already covers this Substack URL under a different
+    // slug — happens when the post's title changed on Substack. Prevents dupes.
+    if (existingUrls.has(normalizedLink)) {
+      if (!synced.includes(link)) synced.push(link);
+      console.log(`  Skipping (already synced under a different slug): ${slug}.md`);
+      continue;
+    }
+
+    // Genuinely new post (no slug file, no URL match) — create it. This also
+    // heals posts wrongly marked synced without a file, e.g. PCT Chapter 6.
     fs.writeFileSync(filePath, frontmatter + '\n\n' + cleanHtml);
-    synced.push(link);
+    if (!synced.includes(link)) synced.push(link);
+    existingUrls.add(normalizedLink);
     newCount++;
     console.log(`  Created: ${slug}.md${coverImage ? ' (with cover image)' : ''}`);
   }

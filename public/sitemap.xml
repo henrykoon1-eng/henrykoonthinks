@@ -1,144 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://henrythinks.com/</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/about</loc>
+    <loc>https://henrykoonthinks.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/quotes</loc>
+    <loc>https://henrykoonthinks.com/quotes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/life</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/life</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/faith</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/faith</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/essays</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/essays</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/the-outdoors</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/the-outdoors</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/poetry</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/poetry</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/category/reviews</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/category/reviews</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/what-i-m-not-into-politics-really-says</loc>
-    <lastmod>2026-03-25</lastmod>
+    <loc>https://henrykoonthinks.com/posts/on-loving-america-and-deadheads</loc>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/death-on-the-matts</loc>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-8-koondance1</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-7-escaping-the-desert</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/an-essay-on-the-lord-s-prayer</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-6-make-some-friends-mountain-man</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-5-great-quests-unnecessarily-undertaken</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-3</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-chapter-4-alone-in-the-wilderness</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/chapter-1-miles-0-0-5</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/chapter-2</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/pct-1-i-m-hiking-from-mexico-to-canada</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/stained-glass-story-the-redemptive-art-of-sub-creation</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/you-shouldn-t-have-to-be-scared-of-cops</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/subcreation-and-stained-glass-windows</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/movie-review-project-hail-mary</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://henrykoonthinks.com/posts/death-on-the-matts</loc>
     <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/book-review-the-doors-of-perception-by-aldous-huxley</loc>
+    <loc>https://henrykoonthinks.com/posts/book-review-the-doors-of-perception-by-aldous-huxley</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/the-vast-and-singular-christ</loc>
+    <loc>https://henrykoonthinks.com/posts/the-vast-and-singular-christ</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/book-review-all-the-pretty-horses</loc>
+    <loc>https://henrykoonthinks.com/posts/book-review-all-the-pretty-horses</loc>
     <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/the-feminine-good-and-evil-in-middle-earth</loc>
+    <loc>https://henrykoonthinks.com/posts/the-feminine-good-and-evil-in-middle-earth</loc>
     <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/life-is-a-story</loc>
+    <loc>https://henrykoonthinks.com/posts/life-is-a-story</loc>
     <lastmod>2024-07-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/the-climb-of-worship</loc>
+    <loc>https://henrykoonthinks.com/posts/the-climb-of-worship</loc>
     <lastmod>2024-07-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/waking-in-woods-a-poem</loc>
+    <loc>https://henrykoonthinks.com/posts/waking-in-woods-a-poem</loc>
     <lastmod>2024-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/today-i-climbed-a-tree-a-short-poem</loc>
+    <loc>https://henrykoonthinks.com/posts/today-i-climbed-a-tree-a-short-poem</loc>
     <lastmod>2024-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/what-is-education</loc>
-    <lastmod>2024-03-12</lastmod>
+    <loc>https://henrykoonthinks.com/posts/watching-from-the-bottom-a-meanish-poem</loc>
+    <lastmod>2024-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/koon-studies-the-study-of-life-the-universe-and-ev</loc>
+    <loc>https://henrykoonthinks.com/posts/koon-studies-the-study-of-life-the-universe-and-ev</loc>
     <lastmod>2024-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://henrythinks.com/posts/the-calling-a-poem</loc>
+    <loc>https://henrykoonthinks.com/posts/the-calling-a-poem</loc>
     <lastmod>2024-01-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://henrythinks.com/posts/lost-at-sea-a-poem</loc>
-    <lastmod>2023-12-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://henrythinks.com/posts/watching-from-the-bottom-a-meanish-poem</loc>
-    <lastmod>1902-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

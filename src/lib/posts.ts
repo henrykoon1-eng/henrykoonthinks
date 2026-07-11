@@ -48,10 +48,15 @@ export function getAllPosts(): PostData[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data } = matter(fileContents);
 
+      const rawDate = data.date;
+      const date = rawDate instanceof Date
+        ? rawDate.toISOString().split('T')[0]
+        : (rawDate ? String(rawDate).split('T')[0] : '');
+
       return {
         slug,
         title: data.title || slug,
-        date: data.date || '',
+        date,
         category: data.category || 'life',
         excerpt: data.excerpt || '',
         coverImage: data.coverImage || undefined,
@@ -60,7 +65,13 @@ export function getAllPosts(): PostData[] {
     })
     .filter((post) => !post.draft);
 
-  return allPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  // Newest first. Sort by actual timestamp so malformed/odd dates can't scramble
+  // the order; anything unparseable sorts to the bottom rather than the top.
+  const time = (d: string) => {
+    const t = Date.parse(d);
+    return Number.isNaN(t) ? -Infinity : t;
+  };
+  return allPosts.sort((a, b) => time(b.date) - time(a.date));
 }
 
 export function getPostsByCategory(category: string): PostData[] {
