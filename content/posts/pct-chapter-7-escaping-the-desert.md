@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 7
 title: "PCT Chapter 7: Escaping the Desert"
 date: "2026-06-24"
 category: "the-outdoors"

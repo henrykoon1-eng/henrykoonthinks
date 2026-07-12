@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 0
 title: "PCT(1) I'm Hiking from Mexico to Canada"
 date: "2026-05-19"
 category: "the-outdoors"

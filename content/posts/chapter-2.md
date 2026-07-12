@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 2
 title: "Chapter 2"
 date: "2026-06-02"
 category: "the-outdoors"

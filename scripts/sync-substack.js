@@ -186,6 +186,17 @@ function parseCategory({ title, description }) {
   return { categories, title: cleanTitle, description: cleanDescription };
 }
 
+// Detect whether a post belongs to a known series (currently the PCT chapters)
+// so new chapters auto-join the on-site collection with the right reading order.
+// The intro post ("PCT(1) I'm Hiking...") has no chapter number and maps to 0.
+// Checks the raw title (which still has any [PCT] tag) and the cleaned title.
+function detectSeries(rawTitle, cleanTitle) {
+  const hay = `${rawTitle || ''} ${cleanTitle || ''}`;
+  if (!/\bpct\b/i.test(hay)) return null;
+  const m = hay.match(/chapter\s*(\d+)/i);
+  return { series: 'pct', seriesOrder: m ? parseInt(m[1], 10) : 0 };
+}
+
 async function main() {
   console.log('Fetching Substack RSS feed...');
   const xml = await fetchFeed(SUBSTACK_FEED_URL);
@@ -219,6 +230,7 @@ async function main() {
     const rawTitle = getTag(item, 'title');
     const rawDescription = getTag(item, 'description');
     const { categories, title, description } = parseCategory({ title: rawTitle, description: rawDescription });
+    const series = detectSeries(rawTitle, title);
     const pubDate = getTag(item, 'pubDate');
     const contentEncoded = getTag(item, 'content:encoded');
 
@@ -236,6 +248,8 @@ async function main() {
 
     const frontmatter = [
       '---',
+      series ? `series: "${series.series}"` : null,
+      series ? `seriesOrder: ${series.seriesOrder}` : null,
       `title: "${title.replace(/"/g, '\\"')}"`,
       `date: "${date}"`,
       catYaml,

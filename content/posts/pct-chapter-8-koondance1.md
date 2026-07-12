@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 8
 title: "PCT Chapter 8: Koondance1"
 date: "2026-07-05"
 category: "the-outdoors"

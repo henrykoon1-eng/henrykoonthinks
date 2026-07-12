@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 6
 title: "Pct Chapter 6- Make Some Friends Mountain Man"
 date: "2026-06-16"
 category: "the-outdoors"

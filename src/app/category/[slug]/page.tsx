@@ -10,11 +10,32 @@ export function generateStaticParams() {
   return getAllCategories().map((cat) => ({ slug: cat }));
 }
 
+// Unique, human descriptions per category — better for search snippets than a
+// generic "browse all X posts" line. Kept in sync with the on-page copy below.
+const CATEGORY_META_DESCRIPTIONS: Record<string, string> = {
+  life: 'Things I think I learn as I stumble along — essays and reflections on everyday life.',
+  faith: 'Thoughts, questions, struggles, revelations, and prayers on faith and the Christian life.',
+  essays: 'Essays on culture, politics, art, and ideas worth thinking through carefully.',
+  'the-outdoors': 'Notes from the trail — including the PCT thru-hike — plus the woods, the trees, and the wild.',
+  poetry: 'Original poems on nature, faith, and the labor to make something beautiful.',
+  reviews: 'Reviews of books, films, gear, and anything else worth a second look.',
+};
+
 export function generateMetadata({ params }: CategoryPageProps) {
   const displayName = getCategoryDisplayName(params.slug);
+  const description =
+    CATEGORY_META_DESCRIPTIONS[params.slug] ||
+    `Browse all ${displayName} posts on Henry Koon Thinks.`;
   return {
     title: `${displayName} — Henry Koon Thinks`,
-    description: `Browse all ${displayName} posts on Henry Koon Thinks.`,
+    description,
+    alternates: { canonical: `/category/${params.slug}` },
+    openGraph: {
+      title: `${displayName} — Henry Koon Thinks`,
+      description,
+      url: `https://henrykoonthinks.com/category/${params.slug}`,
+      type: 'website',
+    },
   };
 }
 

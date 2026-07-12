@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 4
 title: "PCT Chapter 4: Alone in the Wilderness"
 date: "2026-06-03"
 category: "the-outdoors"

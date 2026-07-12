@@ -16,6 +16,10 @@ export interface PostData {
   substackUrl?: string;
   draft?: boolean;
   contentHtml?: string;
+  // Series/collection support (e.g. the PCT chapters). `series` is a stable
+  // key shared by every post in the collection; `seriesOrder` sets reading order.
+  series?: string;
+  seriesOrder?: number;
 }
 
 export function getAllCategories(): string[] {
@@ -61,6 +65,8 @@ export function getAllPosts(): PostData[] {
         excerpt: data.excerpt || '',
         coverImage: data.coverImage || undefined,
         draft: data.draft || false,
+        series: data.series || undefined,
+        seriesOrder: typeof data.seriesOrder === 'number' ? data.seriesOrder : undefined,
       };
     })
     .filter((post) => !post.draft);
@@ -79,6 +85,20 @@ export function getPostsByCategory(category: string): PostData[] {
     const cats = Array.isArray(post.category) ? post.category : [post.category];
     return cats.includes(category);
   });
+}
+
+// All posts in a collection (e.g. "pct"), ordered by seriesOrder ascending so
+// readers move Chapter 1 -> 2 -> 3. Falls back to date order if seriesOrder is
+// missing on a post.
+export function getSeriesPosts(series: string): PostData[] {
+  return getAllPosts()
+    .filter((post) => post.series === series)
+    .sort((a, b) => {
+      const ao = a.seriesOrder ?? Number.MAX_SAFE_INTEGER;
+      const bo = b.seriesOrder ?? Number.MAX_SAFE_INTEGER;
+      if (ao !== bo) return ao - bo;
+      return a.date < b.date ? -1 : 1;
+    });
 }
 
 export function getAllPostSlugs(): string[] {
@@ -126,6 +146,8 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
     excerpt: data.excerpt || '',
     coverImage: data.coverImage || undefined,
     substackUrl: data.substackUrl || undefined,
+    series: data.series || undefined,
+    seriesOrder: typeof data.seriesOrder === 'number' ? data.seriesOrder : undefined,
     contentHtml,
   };
 }

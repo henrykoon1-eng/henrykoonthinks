@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 5
 title: "Pct Chapter 5- Great Quests (unnecessarily undertaken)"
 date: "2026-06-11"
 category: "the-outdoors"

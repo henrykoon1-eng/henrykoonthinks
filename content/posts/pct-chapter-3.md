@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 3
 title: "PCT Chapter 3"
 date: "2026-06-03"
 category: "the-outdoors"

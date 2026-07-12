@@ -1,4 +1,6 @@
 ---
+series: "pct"
+seriesOrder: 1
 title: "Chapter 1. Miles 0-0.5"
 date: "2026-06-02"
 category: "the-outdoors"

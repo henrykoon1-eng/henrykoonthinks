@@ -1,9 +1,15 @@
-import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName } from '@/lib/posts';
+import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName, getSeriesPosts } from '@/lib/posts';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PostSubscribeForm from '@/components/PostSubscribeForm';
-import DisqusComments from '@/components/DisqusComments';
+import Comments from '@/components/Comments';
+import SeriesNav from '@/components/SeriesNav';
 import PostLinkCards from '@/components/PostLinkCards';
+
+// Human-readable names for collections keyed by the `series` frontmatter value.
+const SERIES_TITLES: Record<string, string> = {
+  pct: 'The PCT',
+};
 
 interface PostPageProps {
   params: { slug: string };
@@ -54,6 +60,30 @@ export default async function PostPage({ params }: PostPageProps) {
   const cats = Array.isArray(post.category) ? post.category : [post.category];
   const primaryCategory = cats[0];
 
+  // Series/collection navigation (e.g. the PCT chapters).
+  const seriesPosts = post.series ? getSeriesPosts(post.series) : [];
+  const seriesTitle = post.series ? SERIES_TITLES[post.series] || 'Series' : '';
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://henrykoonthinks.com' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: getCategoryDisplayName(primaryCategory),
+        item: `https://henrykoonthinks.com/category/${primaryCategory}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://henrykoonthinks.com/posts/${params.slug}`,
+      },
+    ],
+  };
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -82,6 +112,10 @@ export default async function PostPage({ params }: PostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-stone-500 mb-6 uppercase tracking-wider">
@@ -147,23 +181,13 @@ export default async function PostPage({ params }: PostPageProps) {
       />
       <PostLinkCards />
 
+      {/* Series / collection navigation (e.g. the PCT chapters) */}
+      {post.series && seriesPosts.length > 1 && (
+        <SeriesNav posts={seriesPosts} currentSlug={params.slug} title={seriesTitle} />
+      )}
+
       {/* Post Footer */}
       <div className="mt-14 pt-10 border-t border-stone-200">
-        {/* Substack comment link for synced posts */}
-        {post.substackUrl && (
-          <div className="text-center mb-10">
-            <a
-              href={`${post.substackUrl}#comments`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 border border-stone-300 text-stone-700 text-sm font-medium tracking-wider uppercase hover:bg-stone-100 transition-colors"
-              style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}
-            >
-              Leave a comment on Substack
-            </a>
-          </div>
-        )}
-
         {/* Subscribe */}
         <div className="mb-10">
           <PostSubscribeForm />
@@ -190,8 +214,8 @@ export default async function PostPage({ params }: PostPageProps) {
         </div>
       </div>
 
-      {/* Comments */}
-      <DisqusComments postSlug={params.slug} postTitle={post.title} />
+      {/* Comments — ad-free (replaces Disqus, whose free tier injected ads) */}
+      <Comments substackUrl={post.substackUrl} />
     </article>
   );
 }
