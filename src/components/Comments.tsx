@@ -24,11 +24,11 @@ interface CommentsProps {
  *      the four values it generates into GISCUS below. Then set enabled: true.
  */
 const GISCUS = {
-  enabled: false,
+  enabled: true,
   repo: 'henrykoon1-eng/henrykoonthinks',
-  repoId: '',        // from giscus.app
-  category: 'General',
-  categoryId: '',     // from giscus.app
+  repoId: 'R_kgDORObEUQ',
+  category: 'Announcements',
+  categoryId: 'DIC_kwDORObEUc4C2T-w',
 };
 
 export default function Comments({ substackUrl }: CommentsProps) {
