@@ -39,6 +39,14 @@ export default function SeriesNav({ posts, currentSlug, title }: SeriesNavProps)
       <ol className="divide-y divide-stone-200">
         {posts.map((p, i) => {
           const isCurrent = p.slug === currentSlug;
+          // Label by the post's own chapter number when we have one (0 = intro),
+          // so the list reads Intro, Ch 1, Ch 2 ... rather than a raw index.
+          const label =
+            typeof p.seriesOrder === 'number'
+              ? p.seriesOrder === 0
+                ? 'Intro'
+                : `Ch ${p.seriesOrder}`
+              : String(i + 1).padStart(2, '0');
           return (
             <li key={p.slug}>
               <Link
@@ -50,8 +58,8 @@ export default function SeriesNav({ posts, currentSlug, title }: SeriesNavProps)
                     : 'text-stone-600 hover:bg-white hover:text-stone-900'
                 }`}
               >
-                <span className="text-xs tabular-nums text-stone-400 w-6 shrink-0">
-                  {String(i + 1).padStart(2, '0')}
+                <span className="text-xs uppercase tracking-wider text-stone-400 w-12 shrink-0">
+                  {label}
                 </span>
                 <span className="leading-snug">{p.title}</span>
               </Link>

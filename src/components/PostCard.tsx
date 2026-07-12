@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { formatPostDate } from '@/lib/date';
 
 interface PostCardPost {
   slug: string;
@@ -56,11 +57,7 @@ export default function PostCard({ post }: PostCardProps) {
           )}
           {post.date && (
             <time className="text-xs text-stone-400 uppercase tracking-wider">
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {formatPostDate(post.date)}
             </time>
           )}
         </div>

@@ -138,10 +138,15 @@ export async function getPostBySlug(slug: string): Promise<PostData | null> {
     contentHtml = processedContent.toString();
   }
 
+  const rawDate = data.date;
+  const normalizedDate = rawDate instanceof Date
+    ? rawDate.toISOString().split('T')[0]
+    : (rawDate ? String(rawDate).split('T')[0] : '');
+
   return {
     slug,
     title: data.title || slug,
-    date: data.date || '',
+    date: normalizedDate,
     category: data.category || 'life',
     excerpt: data.excerpt || '',
     coverImage: data.coverImage || undefined,

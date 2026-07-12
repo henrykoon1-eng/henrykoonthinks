@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import PostCard from '@/components/PostCard';
+import { formatPostDate } from '@/lib/date';
 
 interface PostItem {
   slug: string;
@@ -88,11 +89,7 @@ export default function FilteredPosts({ posts, categories, categoryMap }: Filter
                 <div className="flex items-center gap-4">
                   {filtered[0].date && (
                     <time className="text-xs text-stone-600 uppercase tracking-wider">
-                      {new Date(filtered[0].date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatPostDate(filtered[0].date)}
                     </time>
                   )}
                   <Link

@@ -1,4 +1,5 @@
 import { getAllPostSlugs, getPostBySlug, getCategoryDisplayName, getSeriesPosts } from '@/lib/posts';
+import { formatPostDate } from '@/lib/date';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import PostSubscribeForm from '@/components/PostSubscribeForm';
@@ -146,11 +147,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
           {post.date && (
             <time className="text-sm text-stone-400 uppercase tracking-wider">
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {formatPostDate(post.date)}
             </time>
           )}
         </div>
